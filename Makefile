@@ -6,14 +6,15 @@
 #    By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/21 10:24:38 by dleite-b          #+#    #+#              #
-#    Updated: 2025/10/21 10:31:32 by dleite-b         ###   ########.fr        #
+#    Updated: 2025/10/21 16:26:20 by dleite-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -Iinclude -Ilibft -Imlx
-MLX_FLAGS	= -lmlx -lXext -lX11 -lm
+MLX_DIR		= minilibx-linux
+MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+CFLAGS		= -Wall -Wextra -Werror -Iinclude -I$(MLX_DIR)
 RM			= rm -f
 
 SRC_DIR		= src

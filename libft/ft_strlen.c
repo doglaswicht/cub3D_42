@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: doglasbastos <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/21 17:00:16 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/10/21 17:06:34 by dleite-b         ###   ########.fr       */
+/*   Created: 2024/10/01 16:36:46 by doglasbas         #+#    #+#             */
+/*   Updated: 2024/10/18 13:38:15 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "libft.h"
 
-typedef struct s_game t_game;
-int parse_cub(char *path, t_game *game);
+int	ft_strlen(char *str)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+/* #include<stdio.h>
+int main()
+{
+	char str[] = "doglas";
+	printf("Le valeur de str est: %d",ft_strlen(str));
+} */

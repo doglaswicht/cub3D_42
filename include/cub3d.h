@@ -6,12 +6,12 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/10/21 15:27:33 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:15:19 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3d_H
-# define CUB3D_H
+# define CUB3d_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,7 +29,7 @@ typedef struct s_img
     char    *addr;
     int     bpp;
     int     endian;
-}   t_img
+}   t_img;
 
 
 typedef struct s_player
@@ -41,7 +41,7 @@ typedef struct s_player
     double  plane_x;
     double  plane_y;
     
-}   t_player
+}   t_player;
 
 typedef struct  s_game
 {
@@ -57,5 +57,7 @@ typedef struct  s_game
     int     ceiliing_color;
     
 }   t_game;
+
+int init_game(t_game *game, char *map_path);
 
 #endif
