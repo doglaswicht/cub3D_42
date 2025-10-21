@@ -1,0 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
+/*   Updated: 2025/10/21 15:27:33 by dleite-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3d_H
+# define CUB3D_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <math.h>
+#include "mlx.h"
+#include "parse.h"
+#include "render.h"
+#include "utils.h"
+
+typedef struct s_img
+{
+    void    *img;
+    char    *addr;
+    int     bpp;
+    int     endian;
+}   t_img
+
+
+typedef struct s_player
+{
+    double  x;
+    double  y;
+    double  dir_x;
+    double  dir_y;
+    double  plane_x;
+    double  plane_y;
+    
+}   t_player
+
+typedef struct  s_game
+{
+    void    *mlx;
+    void    *win;
+    t_img   img;
+    t_player    player;
+    int     screen_w;
+    int     screen_h;
+    int     **maps;
+    int     map_w;
+    int     floor_color;
+    int     ceiliing_color;
+    
+}   t_game;
+
+#endif
