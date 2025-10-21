@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/10/21 17:15:19 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:42:44 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_img
     void    *img;
     char    *addr;
     int     bpp;
+    int     line_len;
     int     endian;
 }   t_img;
 
@@ -59,5 +60,6 @@ typedef struct  s_game
 }   t_game;
 
 int init_game(t_game *game, char *map_path);
+void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 #endif
