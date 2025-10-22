@@ -1,7 +1,7 @@
 ```
 .
 ├── Makefile
-├── cub3D
+├── README.md
 ├── include
 │   ├── cub3d.h
 │   ├── parse.h
@@ -11,48 +11,26 @@
 │   ├── Makefile
 │   ├── README.md
 │   ├── ft_atoi.c
-│   ├── ft_atoi.o
 │   ├── ft_bzero.c
-│   ├── ft_bzero.o
 │   ├── ft_isalnum.c
-│   ├── ft_isalnum.o
 │   ├── ft_isalpha.c
-│   ├── ft_isalpha.o
 │   ├── ft_isascii.c
-│   ├── ft_isascii.o
 │   ├── ft_isdigit.c
-│   ├── ft_isdigit.o
 │   ├── ft_isprint.c
-│   ├── ft_isprint.o
 │   ├── ft_memchr.c
-│   ├── ft_memchr.o
 │   ├── ft_memcmp.c
-│   ├── ft_memcmp.o
 │   ├── ft_memcpy.c
-│   ├── ft_memcpy.o
 │   ├── ft_memmove.c
-│   ├── ft_memmove.o
 │   ├── ft_memset.c
-│   ├── ft_memset.o
 │   ├── ft_strchr.c
-│   ├── ft_strchr.o
 │   ├── ft_strlcat.c
-│   ├── ft_strlcat.o
 │   ├── ft_strlcpy.c
-│   ├── ft_strlcpy.o
 │   ├── ft_strlen.c
-│   ├── ft_strlen.o
 │   ├── ft_strncmp.c
-│   ├── ft_strncmp.o
 │   ├── ft_strnstr.c
-│   ├── ft_strnstr.o
 │   ├── ft_strrchr.c
-│   ├── ft_strrchr.o
 │   ├── ft_tolower.c
-│   ├── ft_tolower.o
 │   ├── ft_toupper.c
-│   ├── ft_toupper.o
-│   ├── libft.a
 │   └── libft.h
 ├── map.cub
 ├── maps
@@ -160,22 +138,6 @@
 │       ├── open30.xpm
 │       └── run_tests.sh
 ├── minilibx-linux.tgz
-├── obj
-│   ├── init
-│   │   ├── init_data.o
-│   │   └── init_mlx.o
-│   ├── main.o
-│   ├── parser
-│   │   ├── check_errors.o
-│   │   ├── parser_file.o
-│   │   └── parser_map.o
-│   ├── render
-│   │   ├── draw.o
-│   │   └── raycaster.o
-│   └── utils
-│       ├── error.o
-│       ├── free.o
-│       └── pixel.o
 └── src
     ├── init
     │   ├── init_data.c
@@ -193,5 +155,5 @@
         ├── free.c
         └── pixel.c
 
-20 directories, 173 files
+15 directories, 140 files
 ```
