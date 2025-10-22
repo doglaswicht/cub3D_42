@@ -23,6 +23,7 @@ int close_window(t_game *game)
 int main(int argc, char **argv)
 {
     t_game  game;
+    t_img   img;
 
     if(argc != 2)
     {
@@ -31,20 +32,32 @@ int main(int argc, char **argv)
     }
     if(init_game(&game, argv[1]) == -1)
         return(1);
+    img.img = mlx_new_image(game.mlx, 800, 600);
+    if (!img.img)
+    {
+        printf("Error\nFailed to create image buffer\n");
+        return (1);
+    }
+    img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
+    if (!img.addr)
+    {
+        printf("Error\nFailed to access image buffer\n");
+        return (1);
+    }
     // pintan o fundo
 	for (int y = 0; y < 600; y++)
 	{
 		for (int x = 0; x < 800; x++)
 		{
 			if (y < 300)
-				my_mlx_pixel_put(&game.img, x, y, 0x87CEEB); // white blue (sky)
+				my_mlx_pixel_put(&img, x, y, 0x87CEEB); // white blue (sky)
 			else
-				my_mlx_pixel_put(&game.img, x, y, 0x228B22); // gren (chão)
+				my_mlx_pixel_put(&img, x, y, 0x228B22); // gren (chão)
 		}
 	}
 
 // Copiar imagem para janela
-mlx_put_image_to_window(game.mlx, game.win, game.img.img, 0, 0);
+mlx_put_image_to_window(game.mlx, game.win, img.img, 0, 0);
 mlx_loop(game.mlx);
 
    /* mlx_hook(game.win, 17, 0, close_window, &game);

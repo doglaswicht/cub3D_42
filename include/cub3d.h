@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/10/21 20:42:44 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:08:49 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,42 @@ typedef struct s_player
     
 }   t_player;
 
+//
+typedef struct s_textures
+{
+    void *no;//nord
+    void *so;//sud
+    void *we;//ouest
+    void *ea;//est
+    int w;
+    int h;
+    
+} t_textures;
+
+typedef struct s_world
+{
+    t_player    spawn;
+    t_textures  tx;
+    char     **maps;
+    int     floor_color;
+    int     ceiling_color;
+    
+}   t_world;
+
 typedef struct  s_game
 {
     void    *mlx;
     void    *win;
-    t_img   img;
-    t_player    player;
-    int     screen_w;
-    int     screen_h;
-    int     **maps;
-    int     map_w;
-    int     floor_color;
-    int     ceiliing_color;
-    
-}   t_game;
+    t_world world;
+    t_player p;
+} t_game;
 
-int init_game(t_game *game, char *map_path);
-void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
+    int init_game(t_game *game, char *map_path);
+    void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+    /*
+    int     pase_config(consta char *path, t_world *out);
+    void    render_frame(t_game *g);
+    void    handler_input(t_game *g);
+    */
 #endif
