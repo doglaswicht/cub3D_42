@@ -3,49 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: csturny <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 14:49:01 by dleite-b          #+#    #+#             */
-/*   Updated: 2024/10/18 14:59:48 by dleite-b         ###   ########.fr       */
+/*   Created: 2024/10/03 16:09:14 by csturny           #+#    #+#             */
+/*   Updated: 2024/10/03 16:09:14 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t count)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char		*dst;
-	const unsigned char	*source;
-	size_t			i;
+	char	*s;
+	char	*d;
 
-	if (!dest && !src)
-		return (NULL);
-	dst = (unsigned char *)dest;
-	source = (const unsigned char *)src;
-	i = 0;
-	if (dest > src)
+	s = (char *)src;
+	d = (char *)dst;
+	if (s <= d)
 	{
-		while (count-- > 0)
-			dst[count] = source[count];
+		s += len - 1;
+		d += len - 1;
+		while (len-- && (src != NULL || dst != NULL))
+			*d-- = *s--;
 	}
 	else
 	{
-		while (i < count)
-		{
-			dst[i] = source[i];
-			i++;
-		}
+		while (len-- && (src != NULL || dst != NULL))
+			*d++ = *s++;
 	}
 	return (dst);
 }
-/* #include<stdio.h>
-int main(void)
-{
-	char src[] = "Bresil";
-	char dest[] = "paro";
-
-	{
-		ft_memmove(dest + 2 , src, 4);
-		printf("%s", dest);
-	}
-} */

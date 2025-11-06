@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doglasbastos <marvin@42.fr>                +#+  +:+       +#+        */
+/*   By: csturny <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 14:00:23 by doglasbas         #+#    #+#             */
-/*   Updated: 2024/10/11 17:47:12 by dleite-b         ###   ########.fr       */
+/*   Created: 2024/10/03 14:36:16 by csturny           #+#    #+#             */
+/*   Updated: 2024/10/03 14:36:16 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*last = NULL;
+	int	i;
 
-	while (*s != '\0')
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
-		if (*s == (char)c)
-		{
-			last = s;
-		}
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
 	}
-	if (c == '\0')
-	{
-		return ((char *)s);
-	}
-	else
-	{
-		return ((char *)last);
-	}
+	return (NULL);
 }
-/* #include<stdio.h>
-int main(void)
-{
-	const char *str = "Paralelepipedo";
-	char *resultat = ft_strrchr(str, 'e');
-
-	if (resultat != NULL)
-	{
-		printf(" le dernier char trouvé: %s\n", resultat);
-	}
-	else
-	{
-		printf("char not found\n");
-	}
-} */

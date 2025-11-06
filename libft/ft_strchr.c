@@ -3,46 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: csturny <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:34:55 by dleite-b          #+#    #+#             */
-/*   Updated: 2024/10/14 22:17:09 by dlb              ###   ########.fr       */
+/*   Created: 2024/10/03 14:21:13 by csturny           #+#    #+#             */
+/*   Updated: 2024/10/03 14:21:13 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr( const char *str, int searchedChar)
 {
-	while (*s != '\0')
+	while ((char) searchedChar != *str)
 	{
-		if (*s == (char)c)
-		{
-			return ((char *)s);
-		}
-		s++;
+		if (!*str)
+			return (NULL);
+		str++;
 	}
-	if (c == '\0')
-	{
-		return ((char *)s);
-	}
-	else
-	{
-		return (NULL);
-	}
+	return ((char *) str);
 }
-/* #include<stdio.h>
-int main(void)
-{
-	const char *text = "tentei mas nao consegui";
-	char *resultat = ft_strchr(text,'c');
-	printf("%s\n", text);
-	if (text != NULL)
-	{
-		printf("char found: %s\n", resultat);
-	}
-	else
-	{
-		printf("char dont foud");
-	}
-} */
