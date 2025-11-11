@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/11 10:24:21 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/11 20:11:50 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ typedef struct s_player
     double  plane_y;
     
 }   t_player;*/
+
+typedef struct s_column
+{
+    double  perp_dist;
+    int     line_height;
+    int     draw_start;
+    int     draw_end;
+    int     side;      // 0 = vertical, 1 = horizontal
+    int     face;      // 0=N,1=S,2=E,3=O (on verra après)
+    //double  wall_x;    // [0,1) coord sur le mur
+    //int     tex_x;     // coord X dans la texture
+}   t_column;
 
 //
 typedef struct s_textures
@@ -146,13 +158,14 @@ void	render_frame(t_game *g);
 void	clear_frame(t_game *g, int color);
 
 
-void	player_init(t_game *g);
+
 int	close_window(t_game *g);
 void game_destroy(t_game *g);
 int print_usage(void);
 int game_init(t_game *g, const char *map_path);
 void game_run(t_game *g);
 void	print_map(t_world *w);
+void    my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 
 
@@ -162,16 +175,22 @@ void	print_map(t_world *w);
 void	render_background(t_game *g);
 //void	render_3d_view(t_game *g); // a renomer
 void	draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color); // provioir juste pour desinier une seule ligne vertival
-void render_central_ray_prov(t_game *g); //prvisoier
+//void render_central_ray_prov(t_game *g); //prvisoier
 void	compute_dda_params(const t_game *g, t_raycast *rc);
 void	run_dda(const t_game *g, t_raycast *rc);
 void    compute_perp_distance(const t_game *g, t_raycast *rc);
 void    compute_wall_height(t_raycast *rc);
+//static void init_raycast(t_raycast *rc, int x, const t_game *g);
+void    cast_rays(const t_game *g, t_column cols[WIN_W]);
+void render_walls(t_game *g, const t_column cols[WIN_W]);
+int	get_face(const t_raycast *rc);
+int	hardcode_world(t_world *w);
+void	print_world_debug(const t_world *w);
 
 
 /*parsing (fonction qui seront faites par Doglas)*/
 
-int load_map_simple(t_world *w, const char *path);
+//int load_map_simple(t_world *w, const char *path);
 void	free_map(char **map, int h);
 
 

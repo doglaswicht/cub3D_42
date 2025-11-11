@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 
@@ -30,11 +30,7 @@ void	clear_frame(t_game *g, int color)
 }
 
 
-void render_background(t_game *g)
-{
-	// plus tard : plafond/sol → pour l’instant, fond uni
-	clear_frame(g, 0x500000); // bleu sombre par exemple
-}
+
 
 /*
 // ici ce sera la final
@@ -93,6 +89,7 @@ void render_central_ray_prov(t_game *g)
         rc.draw_start, rc.draw_end);
 }*/
 
+/*
 // remplace le void render_central_ray_prov(t_game *g)
 // ici passe de 1 rayon à tous les pixels écran
 void render_3d_view(t_game *g)
@@ -138,13 +135,80 @@ void render_3d_view(t_game *g)
 		x++;
 	}
 }
+*/
+
+static void	fill_column_basic(t_column *col, const t_raycast *rc)
+{
+	col->perp_dist = rc->perp_wall_dist;
+	col->line_height = rc->line_height;
+	col->draw_start = rc->draw_start;
+	col->draw_end = rc->draw_end;
+	col->side = rc->side;
+	col->face = get_face(rc);
+    // col->face, col->wall_x, col->tex_x seront remplis plus tard
+}
 
 
+static void init_raycast(t_raycast *rc, int x, const t_game *g)
+{
+    double camera_x;
+
+    // de -1 à 1 sur l'écran (gauche à droite)
+    camera_x = 2.0 * x / (double)WIN_W - 1.0;
+
+    ft_bzero(rc, sizeof(t_raycast));   // sécurité, remet tout à 0
+
+    rc->raydir.x = g->player.dir.x + g->player.plane.x * camera_x;
+    rc->raydir.y = g->player.dir.y + g->player.plane.y * camera_x;
+
+    rc->map.x = (int)g->player.pos.x;
+    rc->map.y = (int)g->player.pos.y;
+}
+
+// calcule les rayons.
+// calcule les rayons.
+void    cast_rays(const t_game *g, t_column cols[WIN_W])
+{
+    int         x;
+    t_raycast   rc;
+
+    x = 0;
+    while (x < WIN_W)
+    {
+        // init
+        init_raycast(&rc, x, g);
+
+        // Préparation DDA (cellule de départ, delta, step, side_dist)
+        compute_dda_params(g, &rc);
+
+        // Boucle DDA : trouver le mur
+        run_dda(g, &rc);
+
+        // Correction "distance du rayon", éviter l'effet fish-eye
+        compute_perp_distance(g, &rc);
+
+        // Calculer la hauteur du mur projeté
+        compute_wall_height(&rc);
+
+        // remplir les colonnes
+        fill_column_basic(&cols[x], &rc);
+        x++;
+    }
+}
+
+
+
+
+// toute la frame.
 void render_frame(t_game *g)
 {
-	render_background(g);
-	render_3d_view(g);
+	t_column cols[WIN_W];
+
+	render_background(g);          // ciel + sol
+	//render_3d_view(g);
 	//render_central_ray_prov(g);
+	cast_rays(g, cols); // calcule toutes les colonnes (raycasting)
+	render_walls(g, cols); // dessine toutes les colonnes
 	mlx_put_image_to_window(g->mlx, g->win, g->frame.img, 0, 0);
 }
 

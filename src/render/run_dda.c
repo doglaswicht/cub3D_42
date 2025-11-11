@@ -29,7 +29,7 @@ void run_dda(const t_game *g, t_raycast *rc)
         // ici le Test de collision avec un mur
         if (g->world.map[(int)rc->map.y][(int)rc->map.x] == '1')
 			hit = 1;
-        printf("Debug - Step: map=(%.0f,%.0f) side=%d\n", rc->map.x, rc->map.y, rc->side);
+        //printf("Debug - Step: map=(%.0f,%.0f) side=%d\n", rc->map.x, rc->map.y, rc->side);
     }
 }
 

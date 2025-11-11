@@ -1,7 +1,5 @@
 #include "cub3d.h"
 
-
-
 int	close_window(t_game *g)
 {
 	game_destroy(g);

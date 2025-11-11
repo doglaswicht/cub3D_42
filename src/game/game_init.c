@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+/*
 int	game_init(t_game *g, const char *map_path)
 {
 	g->mlx = NULL;
@@ -25,6 +26,37 @@ int	game_init(t_game *g, const char *map_path)
 
 	return (0);
 }
+*/
+
+// version hardcode_world
+int	game_init(t_game *g, const char *map_path)
+{
+	g->mlx = NULL;
+	g->win = NULL;
+	(void)map_path;
+
+	// 1) Remplir le monde (temporaire)
+	if (hardcode_world(&g->world) != 0)
+	{
+		write(2, "Error: failed to hardcode world\n", 33);
+		return (1);
+	}
+
+	print_map(&g->world);  // pour debug
+	print_world_debug(&g->world);
+
+	// 2) Copier le spawn dans le joueur courant
+	g->player = g->world.spawn;
+
+	// 3) Initialisation MLX
+	if (init_mlx(g) != 0)
+		return (1);
+	if (init_images(g) != 0)
+		return (1);
+
+	return (0);
+}
+
 
 void	game_destroy(t_game *g)
 {
