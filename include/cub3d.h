@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/07 10:57:58 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/11 10:24:21 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,8 @@ void	draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color); //
 void render_central_ray_prov(t_game *g); //prvisoier
 void	compute_dda_params(const t_game *g, t_raycast *rc);
 void	run_dda(const t_game *g, t_raycast *rc);
-
+void    compute_perp_distance(const t_game *g, t_raycast *rc);
+void    compute_wall_height(t_raycast *rc);
 
 
 /*parsing (fonction qui seront faites par Doglas)*/
