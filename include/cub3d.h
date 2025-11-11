@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/06 17:03:53 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/07 10:57:58 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ typedef struct s_textures
 
 typedef struct s_world
 {
-    t_player    spawn;
-    t_textures  tx;
+    t_player    spawn; // joueur
+    t_textures  tx;  // texture
     char     **map;  // '0','1'
     int     map_w; // ajouté
     int     map_h; // ajouté 
@@ -104,6 +104,39 @@ typedef struct  s_game
 } t_game;
 
 
+/**
+ * @struct s_raycast
+ * @brief Contient toutes les informations nécessaires pour le calcul
+ *        et l'affichage d'un seul rayon du raycasting.
+ */
+typedef struct s_raycast
+{
+	/* --- Direction du rayon --- */
+    t_vector	raydir;        // direction du rayon
+    /* --- Position actuelle du rayon dans la map --- */
+	t_vector	map;           // case actuelle dans la map (x, y entiers)
+    
+    /* --- Distances utilisées pour le DDA --- */
+	t_vector	side_dist;     // distance jusqu’à la prochaine ligne de grille
+	t_vector	delta_dist;    // distance entre deux lignes successives
+	double		perp_wall_dist; // distance perpendiculaire entre le joueur et le mur touché
+
+	/* --- Direction d’avancement dans la map --- */
+	int		step_x;          // sens de déplacement sur l’axe X (+1 ou -1)
+	int		step_y;          // sens de déplacement sur l’axe Y (+1 ou -1)
+
+	/* --- Informations de collision --- */
+	int		hit;             // 0 = pas encore de mur, 1 = mur trouvé
+	int		side;            // 0 = mur vertical, 1 = mur horizontal (utilisé pour ombrage)
+
+	/* --- Projection du mur à l’écran --- */
+	int		line_height;     // hauteur en pixels du mur à dessiner
+	int		draw_start;      // pixel Y de début du mur à l’écran
+	int		draw_end;        // pixel Y de fin du mur à l’écran
+}	t_raycast;
+
+
+
 /* mlx_init.c */
 int		init_mlx(t_game *g);
 int		init_images(t_game *g);
@@ -120,6 +153,20 @@ int print_usage(void);
 int game_init(t_game *g, const char *map_path);
 void game_run(t_game *g);
 void	print_map(t_world *w);
+
+
+
+/*raycasting*/
+
+
+void	render_background(t_game *g);
+//void	render_3d_view(t_game *g); // a renomer
+void	draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color); // provioir juste pour desinier une seule ligne vertival
+void render_central_ray_prov(t_game *g); //prvisoier
+void	compute_dda_params(const t_game *g, t_raycast *rc);
+void	run_dda(const t_game *g, t_raycast *rc);
+
+
 
 /*parsing (fonction qui seront faites par Doglas)*/
 
