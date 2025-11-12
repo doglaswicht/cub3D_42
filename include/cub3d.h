@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/11 20:11:50 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/12 12:05:01 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define WIN_W  800
 # define WIN_H  600
 
+// remarque ajouté w et h
 typedef struct s_image  // idem a image dans Yannik 
 {
 	void	*img;       // handle MLX vers l'image
@@ -35,6 +36,8 @@ typedef struct s_image  // idem a image dans Yannik
 	int		bpp;        // bits par pixel
 	int		line_len;   // nb d’octets par ligne
 	int		endian;     // ordre des octets
+    int     w;      // largeur
+    int     h;      // hauteur
 }			t_image;
 
 
@@ -78,11 +81,12 @@ typedef struct s_column
     int     draw_end;
     int     side;      // 0 = vertical, 1 = horizontal
     int     face;      // 0=N,1=S,2=E,3=O (on verra après)
-    //double  wall_x;    // [0,1) coord sur le mur
-    //int     tex_x;     // coord X dans la texture
+    double  wall_x;    // [0,1) coord sur le mur
+    int     tex_x;     // coord X dans la texture
 }   t_column;
 
-//
+/*
+//old
 typedef struct s_textures
 {
     void *no;//nord
@@ -92,6 +96,16 @@ typedef struct s_textures
     int w;
     int h;
     
+} t_textures;
+*/
+
+// new
+// remarque enlevé w et h
+typedef struct s_textures {
+    t_image no;
+    t_image so;
+    t_image we;
+    t_image ea;
 } t_textures;
 
 typedef struct s_world
@@ -153,6 +167,16 @@ typedef struct s_raycast
 int		init_mlx(t_game *g);
 int		init_images(t_game *g);
 
+/*textures*/
+int init_textures_hardcode(t_game *g);
+int get_texel(const t_image *tex, int tx, int ty);
+int load_one_xpm(t_game *g, t_image *dst, const char *path);
+int get_tex_y(const t_image *tex, int line_height, int y, int start);
+double compute_wall_x(const t_game *g, const t_raycast *rc);
+int compute_tex_x(const t_game *g, const t_raycast *rc, double wall_x, int face);
+int get_tex_y_from_start(const t_image *tex, int line_height, int y, int start);
+const t_image *get_tex_for_face(const t_textures *tx, int face);
+
 /* render.c */
 void	render_frame(t_game *g);
 void	clear_frame(t_game *g, int color);
@@ -173,19 +197,19 @@ void    my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 
 void	render_background(t_game *g);
-//void	render_3d_view(t_game *g); // a renomer
 void	draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color); // provioir juste pour desinier une seule ligne vertival
-//void render_central_ray_prov(t_game *g); //prvisoier
 void	compute_dda_params(const t_game *g, t_raycast *rc);
 void	run_dda(const t_game *g, t_raycast *rc);
 void    compute_perp_distance(const t_game *g, t_raycast *rc);
 void    compute_wall_height(t_raycast *rc);
-//static void init_raycast(t_raycast *rc, int x, const t_game *g);
 void    cast_rays(const t_game *g, t_column cols[WIN_W]);
 void render_walls(t_game *g, const t_column cols[WIN_W]);
 int	get_face(const t_raycast *rc);
 int	hardcode_world(t_world *w);
 void	print_world_debug(const t_world *w);
+void fill_column_basic(t_column *col, const t_raycast *rc);
+void fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
+
 
 
 /*parsing (fonction qui seront faites par Doglas)*/

@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+
+// ici provisoir juste pour lancer le play
 int	close_window(t_game *g)
 {
 	game_destroy(g);
@@ -14,10 +16,10 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (print_usage(), 1);
 
-	if (game_init(&g, av[1]) != 0)
+	if (game_init(&g, av[1]) != 0) // patie a Doglas
 		return (1);
 
-	game_run(&g);
+	game_run(&g); // ici commence mon Render moteur 3d
 	game_destroy(&g);
 	return (0);
 }

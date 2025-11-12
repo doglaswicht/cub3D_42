@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+
+// provisoir DEBUG
 static void	print_color_rgb(int color)
 {
 	int	r;
@@ -12,6 +14,8 @@ static void	print_color_rgb(int color)
 	printf("RGB = (%3d, %3d, %3d)\n", r, g, b);
 }
 
+
+// provisoir DEBUG
 void	print_world_debug(const t_world *w)
 {
 	printf("[DEBUG] World info:\n");

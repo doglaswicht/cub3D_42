@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+// Provisoir
+
 /*
 int	game_init(t_game *g, const char *map_path)
 {
@@ -28,7 +30,8 @@ int	game_init(t_game *g, const char *map_path)
 }
 */
 
-// version hardcode_world
+// version hardcode_world: pour avoir valeur a tester
+// A remplacer par Doglas
 int	game_init(t_game *g, const char *map_path)
 {
 	g->mlx = NULL;
@@ -49,15 +52,26 @@ int	game_init(t_game *g, const char *map_path)
 	g->player = g->world.spawn;
 
 	// 3) Initialisation MLX
-	if (init_mlx(g) != 0)
+	if (init_mlx(g) != 0)  // a voir avec Doglas qui reprend!!!
 		return (1);
-	if (init_images(g) != 0)
+
+	// 4) Initialisation image frame
+	if (init_images(g) != 0) // a voir avec Doglas qui reprend
 		return (1);
+	
+	// 5) Initialisation textures
+	if (init_textures_hardcode(g) != 0) // provisoir
+	{
+		return (1);
+	}
 
 	return (0);
 }
 
 
+
+// quand appelé si appelé?
+// a vérifier!!!
 void	game_destroy(t_game *g)
 {
 	// détruire l’image frame si tu en as une

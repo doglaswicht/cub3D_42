@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+
+/**
+ * @brief Renders the background (ceiling and floor) for the entire frame.
+ * @param g Pointer to the game state.
+ *
+ * Fills the top half of the frame with the ceiling color and the bottom half with the floor color.
+ */
 void    render_background(t_game *g)
 {
     int x;

@@ -1,8 +1,14 @@
 #include "cub3d.h"
 
+/**
+ * @brief Performs the DDA (Digital Differential Analyzer) algorithm to find the first wall hit by the ray.
+ * @param g Pointer to the game state.
+ * @param rc Pointer to the raycasting structure (input/output).
+ *
+ * Steps through the map grid until a wall ('1') is hit, updating the raycasting info.
+ */
 void run_dda(const t_game *g, t_raycast *rc)
 {
-    // à remplir!!!
     int hit;
 
     hit = 0;
@@ -33,33 +39,3 @@ void run_dda(const t_game *g, t_raycast *rc)
     }
 }
 
-
-void    compute_perp_distance(const t_game *g, t_raycast *rc)
-{
-    if (rc->side == 0)
-    {
-        rc->perp_wall_dist = (rc->map.x - g->player.pos.x + (1 - rc->step_x) / 2.0) / rc->raydir.x;
-    }
-    else
-    {
-        rc->perp_wall_dist = (rc->map.y - g->player.pos.y + (1 - rc->step_y) / 2.0) / rc->raydir.y;
-    }
-    // ici pas compris a quoi ça sert
-    if (rc->perp_wall_dist <= 0.0)
-        rc->perp_wall_dist = 0.0001;
-}
-
-void    compute_wall_height(t_raycast *rc)
-{
-    // hauteur projeté en fonctin de dist. au mur
-    rc->line_height = (int)(WIN_H / rc->perp_wall_dist);
-
-    // déterminer les postion de début/fin sur l'écran
-    rc->draw_start = -rc->line_height / 2 + WIN_H / 2;
-    if (rc->draw_start < 0)
-        rc->draw_start = 0;
-
-    rc->draw_end = rc->line_height / 2 + WIN_H / 2;
-    if (rc->draw_end >= WIN_H)
-        rc->draw_end = WIN_H - 1;
-}

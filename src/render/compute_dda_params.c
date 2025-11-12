@@ -1,14 +1,17 @@
 #include "cub3d.h"
 
-/* plus besoin directement dans init_raycast(&rc, x, g);  
-static void	init_ray_map(const t_game *g, t_raycast *rc)
-{
-	rc->map.x = (int)g->player.pos.x;
-	rc->map.y = (int)g->player.pos.y;
-}
-*/
 
-
+/**
+ * @brief Calculates the distance the ray must travel to cross one grid square in X and Y directions.
+ * @param rc Pointer to the raycasting structure (input/output).
+ *
+ * Sets delta_dist.x and delta_dist.y, which represent how far the ray must move along its path
+ * to go from one vertical (X) or horizontal (Y) grid line to the next. These values are used
+ * in the DDA loop to incrementally step through the map grid.
+ *
+ * - If the ray direction is zero in an axis, sets a very large value to avoid division by zero.
+ * - Otherwise, uses the absolute value of the inverse of the ray direction for that axis.
+ */
 static void	compute_delta_dist(t_raycast *rc)
 {
 	if (rc->raydir.x == 0)
@@ -21,6 +24,18 @@ static void	compute_delta_dist(t_raycast *rc)
 		rc->delta_dist.y = fabs(1.0 / rc->raydir.y);
 }
 
+/**
+ * @brief Computes the step direction and initial side distances for the DDA algorithm.
+ * @param g Pointer to the game state.
+ * @param rc Pointer to the raycasting structure (input/output).
+ *
+ * Determines whether the ray will step forward (+1) or backward (-1) in X and Y directions
+ * based on the ray direction. Calculates the initial distance from the player's position
+ * to the first grid boundary in both axes, which is needed to start the DDA loop.
+ *
+ * - step_x/step_y: +1 if the ray moves right/down, -1 if left/up.
+ * - side_dist.x/side_dist.y: distance from the player to the next vertical/horizontal grid line.
+ */
 static void	init_step_and_side_dist(const t_game *g, t_raycast *rc)
 {
 	if (rc->raydir.x < 0)
@@ -45,7 +60,13 @@ static void	init_step_and_side_dist(const t_game *g, t_raycast *rc)
 	}
 }
 
-
+/**
+ * @brief Initializes DDA parameters for raycasting (delta distances, steps, and initial side distances).
+ * @param g Pointer to the game state.
+ * @param rc Pointer to the raycasting structure (input/output).
+ *
+ * Prepares all values needed for the DDA loop, including step direction and initial distances to the next grid lines.
+ */
 void	compute_dda_params(const t_game *g, t_raycast *rc)
 {
 	compute_delta_dist(rc);

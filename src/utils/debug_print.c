@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-
+// provisoir Debug
 void	print_map(t_world *w)
 {
 	printf("[DEBUG] Map (%dx%d):\n", w->map_w, w->map_h);

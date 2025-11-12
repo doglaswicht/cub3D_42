@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+// je n'utilise plus
 
 /*
  * Initialise la position, la direction et le plan caméra du joueur.
