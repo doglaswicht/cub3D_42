@@ -68,24 +68,3 @@ int	game_init(t_game *g, const char *map_path)
 	return (0);
 }
 
-
-
-// quand appelé si appelé?
-// a vérifier!!!
-void	game_destroy(t_game *g)
-{
-	// détruire l’image frame si tu en as une
-	if (g->frame.img)
-		mlx_destroy_image(g->mlx, g->frame.img);
-
-	// détruire la fenêtre
-	if (g->win)
-		mlx_destroy_window(g->mlx, g->win);
-
-	// free la map
-	if (g->world.map)
-		free_map(g->world.map, g->world.map_h);
-
-	// sur Linux, si tu utilises mlx_destroy_display:
-	// if (g->mlx) { mlx_destroy_display(g->mlx); free(g->mlx); }
-}

@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/12 12:05:01 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/12 13:54:31 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "parse.h"
 #include "render.h"
 #include "utils.h"
+#include "keys.h"
 #include "libft.h"         // pour ft_strlen
 
 
@@ -188,8 +189,10 @@ void game_destroy(t_game *g);
 int print_usage(void);
 int game_init(t_game *g, const char *map_path);
 void game_run(t_game *g);
+int     game_loop(void *param);
 void	print_map(t_world *w);
 void    my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void    game_destroy(t_game *g);   // wrapper safe, réutilisable
 
 
 
@@ -221,7 +224,7 @@ void	free_map(char **map, int h);
 
 /* foncion pour doglas*/
 //int parse_config(const char *path, t_world *out);
-
+void handle_input(t_game *g); // vide chez moi juste pour la structure
 
     /*
     // pour le parsing
