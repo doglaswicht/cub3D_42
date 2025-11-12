@@ -1,18 +1,10 @@
 #include "cub3d.h"
 
-
-
-int	close_window(t_game *g)
-{
-	game_destroy(g);
-	exit(0);
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_game	g;
 
+	ft_bzero(&g, sizeof(t_game));
 	if (ac != 2)
 		return (print_usage(), 1);
 
@@ -20,6 +12,5 @@ int	main(int ac, char **av)
 		return (1);
 
 	game_run(&g);
-	game_destroy(&g);
 	return (0);
 }

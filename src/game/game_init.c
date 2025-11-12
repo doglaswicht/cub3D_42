@@ -2,44 +2,32 @@
 
 int	game_init(t_game *g, const char *map_path)
 {
+	g->world.floor_color = -1;
+	g->world.ceiling_color = -1;
+	g->world.paths.no = NULL;
+
 	g->mlx = NULL;
 	g->win = NULL;
+	if (!map_path || *map_path == '\0')
+		return (print_error("Missing map path"));
 
-	// 1) Charger la map (temporaire : version simple)
-	if (load_map_simple(&g->world, map_path) != 0)
-	{
-		write(2, "Error: failed to load map\n", 26);
+	/* 1) Parse .cub e preencher g->world (mapa, caminhos, spawn) */
+	if (parse_cub((char *)map_path, g) != 0)
 		return (1);
-	}
 
-	// debug print
-	print_map(&g->world);   // 👈 affiche la map chargée
-	// 2) Initialiser le joueur (caméra)
-	player_init(g);
+	/* 2) Validar/copiar o spawn para o jogador corrente */
+	if (init_player_from_spawn(g) != 0)
+		return (1);
 
-	// 3) Initialisation MLX
+	/* 3) Inicializar MLX e o frame buffer */
 	if (init_mlx(g) != 0)
 		return (1);
 	if (init_images(g) != 0)
 		return (1);
 
+	/* 4) Carregar texturas reais usando os caminhos vindos do parser */
+	if (init_textures_from_paths(g) != 0)
+		return (1);
+
 	return (0);
-}
-
-void	game_destroy(t_game *g)
-{
-	// détruire l’image frame si tu en as une
-	if (g->frame.img)
-		mlx_destroy_image(g->mlx, g->frame.img);
-
-	// détruire la fenêtre
-	if (g->win)
-		mlx_destroy_window(g->mlx, g->win);
-
-	// free la map
-	if (g->world.map)
-		free_map(g->world.map, g->world.map_h);
-
-	// sur Linux, si tu utilises mlx_destroy_display:
-	// if (g->mlx) { mlx_destroy_display(g->mlx); free(g->mlx); }
 }
