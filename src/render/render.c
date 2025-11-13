@@ -11,6 +11,7 @@ void render_frame(t_game *g)
 
 	render_background(g);          // ciel + sol
 	cast_rays(g, cols); // calcule toutes les colonnes (raycasting)
+	debug_faces_once(cols);      // ← debug optionnel
 	render_walls(g, cols); // dessine toutes les colonnes
 	mlx_put_image_to_window(g->mlx, g->win, g->frame.img, 0, 0);
 }

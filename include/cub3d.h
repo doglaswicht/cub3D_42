@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/12 16:48:03 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/13 13:35:18 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "parse.h"
 #include "render.h"
 #include "utils.h"
+#include "debug.h"
 #include "libft.h"         // pour ft_strlen
 #include "keys.h"
 
@@ -230,6 +231,11 @@ void fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
 
 //int load_map_simple(t_world *w, const char *path);
 void	free_map(char **map, int h);
+
+
+// debug
+void    debug_faces_once(const t_column cols[WIN_W]);
+
 
 
 

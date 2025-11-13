@@ -23,6 +23,7 @@ SRC = $(wildcard src/core/*.c) \
 	$(wildcard src/render/*.c) \
 	$(wildcard src/textures/*.c) \
 	$(wildcard src/utils/*.c) \
+	$(wildcard src/debug/*.c) \
 	$(wildcard src/init/*.c)
 
 # Place object files in obj/... preserving subdirectories from src/

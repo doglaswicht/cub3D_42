@@ -19,6 +19,8 @@ int	game_init(t_game *g, const char *map_path)
 	if (init_player_from_spawn(g) != 0)
 		return (1);
 
+	
+
 	/* 3) Inicializar MLX e o frame buffer */
 	if (init_mlx(g) != 0)
 		return (1);
@@ -28,6 +30,9 @@ int	game_init(t_game *g, const char *map_path)
 	/* 4) Carregar texturas reais usando os caminhos vindos do parser */
 	if (init_textures_from_paths(g) != 0)
 		return (1);
+
+	// debug intelligent dans debug.h activer 1 et 0 pour désactiver
+	debug_dump_state(&g->world, &g->player, map_path);
 
 	return (0);
 }
