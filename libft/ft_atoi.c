@@ -3,40 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: csturny <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:11:22 by dleite-b          #+#    #+#             */
-/*   Updated: 2024/10/18 15:20:29 by dleite-b         ###   ########.fr       */
+/*   Created: 2024/10/04 09:47:30 by csturny           #+#    #+#             */
+/*   Updated: 2024/10/09 15:18:57 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+#include "libft.h"
+
+int	ft_isspace(int c);
+
+int	ft_atoi(const char *str)
 {
 	int	i;
-	int	change_sign;
-	int	valeur;
+	int	sign;
+	int	result;
 
 	i = 0;
-	change_sign = 1;
-	valeur = 0;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+	sign = 1;
+	result = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '+' && str[i + 1] != '-')
+		i++;
+	if (str[i] == '-')
 	{
+		sign = -1;
 		i++;
 	}
-	while (str[i] == '+' || str[i] == '-')
+	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
-		if (str[i] == '-')
-		{
-			change_sign = -1;
-		}
+		result *= 10;
+		result += str[i] - '0';
 		i++;
 	}
-	if (str[i] == '-' || str[i] == '+')
-		return (0);
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		valeur = valeur * 10 + (str[i] - 48);
-			i++;
-	}
-	return (valeur * change_sign);
+	result *= sign;
+	return (result);
+}
+
+int	ft_isspace(int c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
 }

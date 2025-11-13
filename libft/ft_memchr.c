@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: csturny <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 15:40:41 by dleite-b          #+#    #+#             */
-/*   Updated: 2024/10/11 17:42:52 by dleite-b         ###   ########.fr       */
+/*   Created: 2024/10/03 14:54:50 by csturny           #+#    #+#             */
+/*   Updated: 2024/10/03 14:54:50 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,16 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*ptr = (const unsigned char *)s;
+	size_t	i;
 
-	while (n != 0)
+	if (!s && !c && !n)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		if (*ptr == (unsigned char)c)
-		{
-			return ((void *)ptr);
-		}
-		ptr++;
-		n--;
+		if (*(const unsigned char *)(s + i) == (unsigned char) c)
+			return ((void *)((const unsigned char *) s + i));
+		i++;
 	}
 	return (NULL);
 }
-/* #include<stdio.h>
-int main(void)
-{
-	char *str = "found the $ spion";
-	char *resultat = ft_memchr(str, '$', 11);
-
-	if (resultat != NULL)
-	{
-		printf("espion est: %s\n", resultat);
-	}
-	else
-	{
-		printf("espion dont found\n");
-	}
-
-} */

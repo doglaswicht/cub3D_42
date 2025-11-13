@@ -1,55 +1,55 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/21 10:24:38 by dleite-b          #+#    #+#              #
-#    Updated: 2025/10/21 16:26:20 by dleite-b         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME    = cub3d
 
-NAME		= cub3D
-CC			= cc
-MLX_DIR		= minilibx-linux
-MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-CFLAGS		= -Wall -Wextra -Werror -Iinclude -I$(MLX_DIR)
-RM			= rm -f
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror
 
-SRC_DIR		= src
-OBJ_DIR		= obj
+# préprocesseur (headers) : inclure le répertoire include et mlx
+CPPFLAGS = -I$(INCDIR) $(MLX_INC) -Ilibft
 
-SRC			= $(wildcard $(SRC_DIR)/**/*.c) $(wildcard $(SRC_DIR)/*.c)
-OBJ			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+MLX_DIR = mlx
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_INC = -I$(MLX_DIR)
+MLX_LNK = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-LIBFT		= libft/libft.a
+INCDIR  = include
+SRCDIR  = src
+OBJ_DIR = obj
 
-all: $(NAME)
+SRC = $(wildcard src/core/*.c) \
+	$(wildcard src/game/*.c) \
+	$(wildcard src/mlx/*.c) \
+	$(wildcard src/parser/*.c) \
+	$(wildcard src/player/*.c) \
+	$(wildcard src/render/*.c) \
+	$(wildcard src/textures/*.c) \
+	$(wildcard src/utils/*.c) \
+	$(wildcard src/init/*.c)
 
-$(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
-	@echo "cub3D compiled!"
+# Place object files in obj/... preserving subdirectories from src/
+OBJ     = $(patsubst $(SRCDIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
-$(LIBFT):
+# Compilation des .c en .o en écrivant les .o dans $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+all: $(MLX_LIB) libft/libft.a $(NAME)
+libft/libft.a:
 	@$(MAKE) -C libft
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(MLX_LIB):
+	@$(MAKE) -C $(MLX_DIR)
+
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) libft/libft.a $(MLX_LNK) -o $(NAME)
 
 clean:
-	@$(MAKE) clean -C libft
-	@$(RM) -r $(OBJ_DIR)
-	@echo "Objects removed."
+	rm -f $(OBJ)
+	$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
-	@$(MAKE) fclean -C libft
-	@$(RM) $(NAME)
-	@echo "Binaire removed."
+	rm -f $(NAME)
 
 re: fclean all
 
-bonus: all
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

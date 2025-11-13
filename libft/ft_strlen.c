@@ -3,30 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doglasbastos <marvin@42.fr>                +#+  +:+       +#+        */
+/*   By: csturny <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 16:36:46 by doglasbas         #+#    #+#             */
-/*   Updated: 2024/10/18 13:38:15 by dleite-b         ###   ########.fr       */
+/*   Created: 2024/10/01 20:50:00 by csturny           #+#    #+#             */
+/*   Updated: 2024/10/01 20:50:00 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	size;
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	size = 0;
+	while (str[size])
+		size++;
+	return (size);
 }
-
-/* #include<stdio.h>
-int main()
-{
-	char str[] = "doglas";
-	printf("Le valeur de str est: %d",ft_strlen(str));
-} */
