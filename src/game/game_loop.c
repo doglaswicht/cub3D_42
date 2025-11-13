@@ -44,7 +44,7 @@ int game_loop(void *param)
 void game_run(t_game *g)
 {
     mlx_hook(g->win, EV_DESTROY, 0, close_window, g);
-    mlx_hook(g->win, EV_KEYPRESS, 0, key_hook, g);
+    mlx_hook(g->win, EV_KEYPRESS, 1L << 0, key_hook, g);
     mlx_loop_hook(g->mlx, game_loop, g);
     mlx_loop(g->mlx);
 }
