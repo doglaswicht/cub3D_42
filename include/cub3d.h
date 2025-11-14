@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/13 13:35:18 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/14 19:59:43 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,6 @@ const t_image *get_tex_for_face(const t_textures *tx, int face);
 /* render.c */
 void	render_frame(t_game *g);
 void	clear_frame(t_game *g, int color);
-
 
 
 int	close_window(t_game *g);

@@ -5,14 +5,13 @@
  * @brief Renders the entire frame: background, walls, and displays it.
  * @param g Pointer to the game state.
  */
-void render_frame(t_game *g)
+void	render_frame(t_game *g)
 {
-	t_column cols[WIN_W];
+	t_column	cols[WIN_W];
 
-	render_background(g);          // ciel + sol
-	cast_rays(g, cols); // calcule toutes les colonnes (raycasting)
-	debug_faces_once(cols);      // ← debug optionnel
-	render_walls(g, cols); // dessine toutes les colonnes
+	render_background(g);
+	cast_rays(g, cols);
+	debug_faces_once(cols);
+	render_walls(g, cols);
 	mlx_put_image_to_window(g->mlx, g->win, g->frame.img, 0, 0);
 }
-
