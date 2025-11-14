@@ -50,7 +50,5 @@ int init_images(t_game *g)
 {
     if (create_frame(g))
         return (1);
-    // Si tu as déjà tes textures :
-    // if (init_textures(g)) return (1);
     return (0);
 }
