@@ -1,12 +1,18 @@
 #include "cub3d.h"
 
-
 void free_map(char **map, int h)
 {
-	if (!map) return;
-	for (int i = 0; i < h; i++)
-		free(map[i]);
-	free(map);
+    int i = 0;
+    if (!map)
+        return;
+    while (i < h)
+    {
+        if (map[i])
+            free(map[i]);
+        map[i] = NULL;
+        i++;
+    }
+    free(map);
 }
 
 

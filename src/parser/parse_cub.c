@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:08:44 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/12 15:30:02 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:10:58 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ int parse_cub(char *path, t_game *game)
     status = parse_lines(fd, &game->world);
     close(fd);
     if (status == -1)
-        destroy_world(&game->world);
+        game_destroy(game);
     return (status);
 }
