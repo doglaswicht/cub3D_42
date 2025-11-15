@@ -3,9 +3,10 @@ SO ./textures/Wall.xpm
 WE ./textures/Wall.xpm
 EA ./textures/Wall.xpm
 
-F 0,0,0
-C 255,255,255
+F 10,20,30
+C 100,150,200
 
-11111111
-1N000..1
-11111111
+0N000
+11111
+10001
+11111

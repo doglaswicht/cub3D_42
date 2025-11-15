@@ -1,7 +1,6 @@
 NO ./textures/Wall1.xpm
 SO ./textures/Wall2.xpm
 WE ./textures/Wall3.xpm
-# EA manquant !
 
 F 60,60,60
 C 120,120,120

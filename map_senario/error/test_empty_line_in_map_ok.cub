@@ -1,12 +1,14 @@
 NO ./textures/Wall1.xpm
-NO ./textures/Wall2.xpm   # <-- Duplication volontaire
 SO ./textures/Wall3.xpm
 WE ./textures/Wall4.xpm
 EA ./textures/Wall5.xpm
 
-F 10,10,10
-C 100,100,100
 
-111
-1N1
-111
+F 0,0,0
+C 255,255,255
+
+11111
+1N001
+
+10001
+11111

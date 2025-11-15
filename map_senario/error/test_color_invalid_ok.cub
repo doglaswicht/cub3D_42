@@ -3,10 +3,9 @@ SO ./textures/Wall.xpm
 WE ./textures/Wall.xpm
 EA ./textures/Wall.xpm
 
-F 0,0,0
-C 255,255,255
+F 256,10,10   
+C 10,10,-1     
 
-1111
-1N01
-1X01   # <-- caractère invalide
-1111
+111
+1N1
+111
