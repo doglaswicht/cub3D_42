@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:57 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/15 21:30:04 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:39:49 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    rotate_player(t_game *g, double angle)
 {
     double old_dir_x = g->player.dir.x;
-    double old_plane_x = g->player.dir.y;
+    double old_plane_x = g->player.dir.x;
     
     /* rotaciona vetor direcao*/
     g->player.dir.x  = g->player.dir.x * cos(angle)
