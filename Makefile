@@ -23,7 +23,8 @@ SRC = $(wildcard src/core/*.c) \
 	$(wildcard src/render/*.c) \
 	$(wildcard src/textures/*.c) \
 	$(wildcard src/utils/*.c) \
-	$(wildcard src/init/*.c)
+	$(wildcard src/init/*.c) \
+	$(wildcard src/input/*.c)
 
 # Place object files in obj/... preserving subdirectories from src/
 OBJ     = $(patsubst $(SRCDIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))

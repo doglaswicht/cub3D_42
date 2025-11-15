@@ -12,5 +12,6 @@ int	main(int ac, char **av)
 		return (1);
 
 	game_run(&g);
+
 	return (0);
 }

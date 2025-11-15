@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 21:21:34 by dleite-b          #+#    #+#             */
+/*   Updated: 2025/11/15 21:23:22 by dleite-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 /*
 void	game_run(t_game *g)
@@ -16,11 +28,6 @@ void	game_run(t_game *g)
 	mlx_loop(g->mlx);
 }*/
 
-void handle_input(t_game *g)
-{
-    (void)g;
-    // Rien ici pour l’instant — ce sera fait par le module mouvement
-}
 
 static int key_hook(int key, t_game *g)
 {
@@ -36,7 +43,6 @@ int game_loop(void *param)
     t_game *g;
 
     g = (t_game *)param;
-    handle_input(g);        // stub tant que A n’a pas branché les inputs
     render_frame(g);
     return (0);
 }
@@ -45,6 +51,7 @@ void game_run(t_game *g)
 {
     mlx_hook(g->win, EV_DESTROY, 0, close_window, g);
     mlx_hook(g->win, EV_KEYPRESS, 1L << 0, key_hook, g);
+    mlx_hook(g->win, 2, 1L<<0, handle_input, g);
     mlx_loop_hook(g->mlx, game_loop, g);
     mlx_loop(g->mlx);
 }

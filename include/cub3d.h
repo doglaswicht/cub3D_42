@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/12 16:48:03 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:27:22 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,12 @@ void fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
 //int load_map_simple(t_world *w, const char *path);
 void	free_map(char **map, int h);
 
+
+/*Movimentation / collision */
+int		handle_input(int key, t_game *g);
+void	move_player(t_game *g, double dx, double dy);
+void	rotate_player(t_game *g, double angle);
+int		is_wall(const t_world *w, double x, double y);
 
 
 /* foncion pour doglas*/
