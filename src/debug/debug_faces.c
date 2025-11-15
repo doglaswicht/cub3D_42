@@ -1,3 +1,6 @@
+#ifndef DEBUG_CUB3D
+# define DEBUG_CUB3D 1
+#endif
 #include "cub3d.h"
 
 #if DEBUG_CUB3D

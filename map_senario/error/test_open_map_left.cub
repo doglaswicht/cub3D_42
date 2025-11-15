@@ -1,0 +1,11 @@
+NO ./textures/a.xpm
+SO ./textures/b.xpm
+WE ./textures/c.xpm
+EA ./textures/d.xpm
+
+F 40,40,40
+C 140,140,240
+
+..111
+.N001
+11111

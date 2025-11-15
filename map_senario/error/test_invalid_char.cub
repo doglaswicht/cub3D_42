@@ -1,0 +1,12 @@
+NO ./textures/Wall.xpm
+SO ./textures/Wall.xpm
+WE ./textures/Wall.xpm
+EA ./textures/Wall.xpm
+
+F 0,0,0
+C 255,255,255
+
+1111
+1N01
+1X01   # <-- caractère invalide
+1111

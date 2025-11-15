@@ -40,6 +40,7 @@ int	game_init(t_game *g, const char *map_path)
         game_destroy(g);
         return (1);
     }
+    printf("CALL DEBUG STATE\n");
     debug_dump_state(&g->world, &g->player, map_path);
     return (0);
 }

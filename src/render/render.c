@@ -35,6 +35,7 @@ void	render_frame(t_game *g)
         debug_dump_column_table((const t_column[]){cols[idx[0]], cols[idx[1]], cols[idx[2]], cols[idx[3]], cols[idx[4]]}, idx);
         debug_dump_raycast_table(rc_debug, idx);
         printf("=========================\n\n");
+        printf("CALL DEBUG FACES\n");
     }
     debug_faces_once(cols);
     render_walls(g, cols);
