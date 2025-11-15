@@ -3,14 +3,14 @@
 double compute_wall_x(const t_game *g, const t_raycast *rc)
 {
     double wall_x;
+    double fraction;
 
     if (rc->side == 0)
         wall_x = g->player.pos.y + rc->perp_wall_dist * rc->raydir.y;
-    /*else
-        wall_x = g->player.pos.x + rc->perp_wall_dist - rc->raydir.x;*/
     else
         wall_x = g->player.pos.x + rc->perp_wall_dist * rc->raydir.x;
-    return wall_x - floor(wall_x);
+    fraction = wall_x - floor(wall_x);
+    return fraction;
 }
 
 int compute_tex_x(const t_game *g, const t_raycast *rc, double wall_x, int face)

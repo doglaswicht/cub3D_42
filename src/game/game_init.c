@@ -1,4 +1,5 @@
 #include "cub3d.h"
+#include "debug.h"
 
 static int	init_world(t_game *g, const char *map_path)
 {

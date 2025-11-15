@@ -73,6 +73,7 @@ void    compute_wall_height(t_raycast *rc)
  * @param g Pointer to the game state.
  * @param cols Array of columns to fill (size WIN_W).
  */
+/*
 void     cast_rays(const t_game *g, t_column cols[WIN_W])
 {
 	int         x;
@@ -98,6 +99,29 @@ void     cast_rays(const t_game *g, t_column cols[WIN_W])
 
 		fill_column_basic(&cols[x], &rc);
 		fill_column_tex(g, &cols[x], &rc);
+		
 		x++;
 	}
+}*/
+
+void cast_rays(const t_game *g, t_column cols[WIN_W], t_raycast rc_debug[5], int idx[5], int n)
+{
+    int x;
+    t_raycast rc;
+    x = 0;
+    while (x < WIN_W)
+    {
+   
+		init_raycast(&rc, x, g);
+		compute_dda_params(g, &rc);
+		run_dda(g, &rc);
+		compute_perp_distance(g, &rc);
+		compute_wall_height(&rc);
+        fill_column_basic(&cols[x], &rc);
+        fill_column_tex(g, &cols[x], &rc);
+        for (int i = 0; i < n; i++)
+            if (x == idx[i])
+                rc_debug[i] = rc;
+        x++;
+    }
 }
