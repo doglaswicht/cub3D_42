@@ -15,8 +15,8 @@
 
 int		handle_input(int key, t_game *g)
 {
-	double move_splayereed = 0.15;   // ajuste fino deplayerois
-	double rot_splayereed = 0.08;    // ~3°
+	double move_speed = 0.15;   // ajuste fino deplayerois
+	double rot_speed = 0.08;    // ~3°
 
 	if (key == 65307) // ESC
 		exit(0);
@@ -24,34 +24,34 @@ int		handle_input(int key, t_game *g)
 	// devant (W)
 	if (key == 'w')
 		move_player(g,
-			g->player.dir.x * move_splayereed,
-			g->player.dir.y * move_splayereed);
+			g->player.dir.x * move_speed,
+			g->player.dir.y * move_speed);
 
 	// derriere (S)
 	if (key == 's')
 		move_player(g,
-			-g->player.dir.x * move_splayereed,
-			-g->player.dir.y * move_splayereed);
+			-g->player.dir.x * move_speed,
+			-g->player.dir.y * move_speed);
 
 	// Strafe gauche (A)
 	if (key == 'a')
 		move_player(g,
-			-g->player.plane.x * move_splayereed,
-			-g->player.plane.y * move_splayereed);
+			-g->player.plane.x * move_speed,
+			-g->player.plane.y * move_speed);
 
 	// Strafe droite (D)
 	if (key == 'd')
 		move_player(g,
-			g->player.plane.x * move_splayereed,
-			g->player.plane.y * move_splayereed);
+			g->player.plane.x * move_speed,
+			g->player.plane.y * move_speed);
 
 	// Rotação gauche (←)
 	if (key == 65361)
-		rotate_player(g, -rot_splayereed);
+		rotate_player(g, -rot_speed);
 
 	// Rotação droite (→)
 	if (key == 65363)
-		rotate_player(g, rot_splayereed);
+		rotate_player(g, rot_speed);
 
 	return (0);
 }
