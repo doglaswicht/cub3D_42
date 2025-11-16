@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/15 21:27:22 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:46:44 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ typedef struct s_image  // idem a image dans Yannik
 }			t_image;
 
 
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vector;
 
 /**
  * @struct s_player

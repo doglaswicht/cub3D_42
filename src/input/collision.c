@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:40:31 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/15 20:56:12 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:02:02 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int is_wall(const t_world *w, double x, double y)
 
     
     /*Fora do map -> trate como parede para evitar segfault*/
-if(mx < 0 || my < 0 || my >= w->map_h || mx >= (int)ft_strlen(w->map[my]))
+if(mx < 0 || my < 0 || my >= w->map_h)
     return (1);
+int line_len = w->map[my] ? (int)ft_strlen(w->map[my]) : 0;
+if(mx >= line_len)
+    return(1);
 
 return(w->map[my][mx] == '1');
 
