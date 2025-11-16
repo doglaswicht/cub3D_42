@@ -144,6 +144,10 @@ int hardcode_world(t_world *w);
 void print_world_debug(const t_world *w);
 void fill_column_basic(t_column *col, const t_raycast *rc);
 void fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
+int get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y);
+int	clamp_tex_x(const t_column *col, const t_image *tex);
+int	clamp_draw_end(const t_column *col);
+int	clamp_draw_start(const t_column *col);
 
 /* parsing */
 void free_map(char **map, int h);
