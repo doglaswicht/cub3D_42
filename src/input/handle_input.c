@@ -19,7 +19,7 @@ int		handle_input(int key, t_game *g)
 	double rot_speed = 0.08;    // ~3°
 
 	if (key == 65307) // ESC
-		exit(0);
+		return(close_window(g));
 
 	// devant (W)
 	if (key == 'w')
