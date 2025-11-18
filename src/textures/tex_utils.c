@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   text_utils.c                                       :+:      :+:    :+:   */
+/*   tex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:55:26 by csturny           #+#    #+#             */
-/*   Updated: 2025/11/16 13:57:45 by csturny          ###   ########.fr       */
+/*   Updated: 2025/11/18 15:55:09 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	get_tex_y_from_start(const t_image *tex, int line_height, int y, int start)
 
 	step = (double)tex->h / (double)line_height;
 	tex_pos0 = (start - WIN_H / 2 + line_height / 2) * step;
-	tex_pos = (tex_pos0 + (double)(y - start)) * step;
+	tex_pos = tex_pos0 + (double)(y - start) * step;
 	tex_y = (int)tex_pos;
 	return (clampi(tex_y, 0, tex->h - 1));
 }

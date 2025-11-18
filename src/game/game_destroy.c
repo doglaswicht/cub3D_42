@@ -22,25 +22,6 @@ static void destroy_textures(t_game *g)
     t->we.img = NULL;
 }
 
-/*
-void game_destroy(t_game *g)
-{
-    if (g->frame.img)
-        mlx_destroy_image(g->mlx, g->frame.img);
-    destroy_textures(g);
-    if (g->win)
-        mlx_destroy_window(g->mlx, g->win);
-#ifdef __linux__
-    if (g->mlx)
-        mlx_destroy_display(g->mlx);
-#endif
-    if (g->mlx)
-        free(g->mlx);
-    if (g->world.map)
-        free_map(g->world.map, g->world.map_h); // si allouée dynamiquement
-}
-*/
-
 void game_destroy(t_game *g)
 {
     if (!g)
