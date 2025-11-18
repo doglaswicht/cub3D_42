@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_face.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 13:39:31 by csturny           #+#    #+#             */
+/*   Updated: 2025/11/16 13:40:25 by csturny          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /**
@@ -5,24 +17,23 @@
  * @param rc Pointer to the raycasting result structure.
  * @return One of FACE_NORTH, FACE_SOUTH, FACE_EAST, or FACE_WEST.
  *
- * Uses the ray direction and the side hit (vertical/horizontal) to identify the wall face.
+ * Uses the ray direction and the side hit (vertical/horizontal)
+ * to identify the wall face.
  */
 int	get_face(const t_raycast *rc)
 {
-	//Pour corriger l’inversion Est/Ouest, il faut inverser ces deux retours :
 	if (rc->side == 0)
 	{
 		if (rc->raydir.x > 0)
-			return (FACE_EAST);  // on regarde vers l'est  → EA
+			return (FACE_EAST);
 		else
-			return (FACE_WEST); // on regarde vers l'ouest → WE
+			return (FACE_WEST);
 	}
 	else
 	{
-		// ICI : on inverse N/S par rapport à ce que tu avais
 		if (rc->raydir.y > 0)
-			return (FACE_SOUTH); // on regarde vers le sud  → SO
+			return (FACE_SOUTH);
 		else
-			return (FACE_NORTH); // on regarde vers le nord → NO
+			return (FACE_NORTH);
 	}
 }
