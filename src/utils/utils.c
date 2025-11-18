@@ -1,5 +1,12 @@
 #include "cub3d.h"
+#include "utils.h"
 
+
+int print_error(char *msg)
+{
+    printf("Error\n%s\n", msg);
+    return (-1);
+}
 
 void free_map(char **map, int h)
 {

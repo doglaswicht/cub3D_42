@@ -26,7 +26,10 @@ typedef struct s_image {
     int     h;
 } t_image;
 
-
+typedef struct s_vector {
+    double  x;
+    double  y;
+} t_vector;
 
 typedef struct s_player {
     t_vector pos;
