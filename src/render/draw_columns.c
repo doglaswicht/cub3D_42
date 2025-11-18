@@ -44,8 +44,8 @@ static void render_wall_slice(t_game *g, int x, const t_column *col)
     {
         int tex_y = get_tex_y_from_start(tex, col->line_height, y, start);
         int color = get_texel(tex, tex_x, tex_y);
-        if (col->side == 1)
-            color = (color >> 1) & 0x7F7F7F;
+        //if (col->side == 1)
+            //color = (color >> 1) & 0x7F7F7F; // ici shading 
         my_mlx_pixel_put(&g->frame, x, y, color);
         y++;
     }

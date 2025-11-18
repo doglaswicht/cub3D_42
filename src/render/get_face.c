@@ -13,16 +13,16 @@ int	get_face(const t_raycast *rc)
 	if (rc->side == 0)
 	{
 		if (rc->raydir.x > 0)
-			return (FACE_WEST);
+			return (FACE_EAST);  // on regarde vers l'est  → EA
 		else
-			return (FACE_EAST);
+			return (FACE_WEST); // on regarde vers l'ouest → WE
 	}
 	else
 	{
 		// ICI : on inverse N/S par rapport à ce que tu avais
 		if (rc->raydir.y > 0)
-			return (FACE_NORTH);
+			return (FACE_SOUTH); // on regarde vers le sud  → SO
 		else
-			return (FACE_SOUTH);
+			return (FACE_NORTH); // on regarde vers le nord → NO
 	}
 }

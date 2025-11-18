@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 10:31:36 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/16 21:46:44 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:05:38 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 #include "keys.h"
 
 
-# define WIN_W  1920
-# define WIN_H  1080
+# define WIN_W  800
+# define WIN_H  600
 
 // remarque ajouté w et h
 typedef struct s_image  // idem a image dans Yannik 
