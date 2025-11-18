@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_world.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:44:15 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/12 17:10:47 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:55:48 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	free_paths(t_tex_paths *paths)
 	paths->ea = NULL;
 }
 
-void	destroy_world(t_world *w)
+void	qdestroy_world(t_world *w)
 {
 	if (!w)
 		return ;

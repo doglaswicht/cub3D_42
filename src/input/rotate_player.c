@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:57 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/15 21:39:49 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:12:32 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void    rotate_player(t_game *g, double angle)
 {
     double old_dir_x = g->player.dir.x;
-    double old_plane_x = g->player.dir.x;
-    
+    double old_plane_x = g->player.plane.x;
+    q
     /* rotaciona vetor direcao*/
     g->player.dir.x  = g->player.dir.x * cos(angle)
         - g->player.dir.y * sin(angle);
