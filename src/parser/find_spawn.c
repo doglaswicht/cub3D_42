@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:05:40 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/12 14:30:54 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:45:30 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "cub3d.h"
 
-static void set_dir(t_player *spawn, double dir_x, double dir_y)
+static	void	set_dir(t_player *spawn, double dir_x, double dir_y)
 {
 	spawn->dir.x = dir_x;
 	spawn->dir.y = dir_y;
@@ -22,7 +22,7 @@ static void set_dir(t_player *spawn, double dir_x, double dir_y)
 	spawn->plane.y = dir_x * 0.66;
 }
 
-static void assign_spawn(t_world *w, int x, int y, char tile)
+static	void	assign_spawn(t_world *w, int x, int y, char tile)
 {
 	w->spawn.pos.x = x + 0.5;
 	w->spawn.pos.y = y + 0.5;
