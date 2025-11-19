@@ -6,12 +6,11 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:56:05 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/19 15:52:46 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:43:01 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "utils.h"
 
 int print_error(char *msg)
 {

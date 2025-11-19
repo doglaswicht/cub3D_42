@@ -1,173 +1,196 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
+/*   Updated: 2025/11/19 21:07:10 by dleite-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <math.h>
-#include "mlx.h"
-#include "parse.h"
-#include "render.h"
-#include "utils.h"
-#include "libft.h"
-#include "keys.h"
+/* ----- System / external deps -- */
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <math.h>
+# include "mlx.h"
+# include "libft.h"
 
-#define WIN_W  800
-#define WIN_H  600
+/* ----- Window & input -- */
+# define WIN_W       800
+# define WIN_H       600
+# define KEY_ESC     65307
+# define EV_KEYPRESS 2
+# define EV_DESTROY  17
 
-typedef struct s_image {
-    void    *img;
-    char    *addr;
-    int     bpp;
-    int     line_len;
-    int     endian;
-    int     w;
-    int     h;
-} t_image;
+/* ----- Rendering helpers -- */
+# define FACE_NORTH 0
+# define FACE_SOUTH 1
+# define FACE_EAST  2
+# define FACE_WEST  3
 
-typedef struct s_vector {
-    double  x;
-    double  y;
-} t_vector;
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		w;
+	int		h;
+}				t_image;
 
-typedef struct s_player {
-    t_vector pos;
-    t_vector dir;
-    t_vector plane;
-} t_player;
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}				t_vector;
 
-typedef struct s_column {
-    double  perp_dist;
-    int     line_height;
-    int     draw_start;
-    int     draw_end;
-    int     side;
-    int     face;
-    double  wall_x;
-    int     tex_x;
-} t_column;
+typedef struct s_player
+{
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	plane;
+}				t_player;
 
-typedef struct s_tex_paths {
-    char *no;
-    char *so;
-    char *we;
-    char *ea;
-} t_tex_paths;
+typedef struct s_column
+{
+	double	perp_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		side;
+	int		face;
+	double	wall_x;
+	int		tex_x;
+}				t_column;
 
-typedef struct s_textures {
-    t_image no;
-    t_image so;
-    t_image we;
-    t_image ea;
-} t_textures;
+typedef struct s_tex_paths
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+}				t_tex_paths;
 
-typedef struct s_world {
-    t_player    spawn;
-    t_textures  tx;
-    char      **map;
-    int         map_w;
-    int         map_h;
-    int         floor_color;
-    int         ceiling_color;
-    t_tex_paths paths;
-} t_world;
+typedef struct s_textures
+{
+	t_image	no;
+	t_image	so;
+	t_image	we;
+	t_image	ea;
+}				t_textures;
 
-typedef struct s_game {
-    void    *mlx;
-    void    *win;
-    t_image frame;
-    t_world world;
-    t_player player;
-} t_game;
+typedef struct s_world
+{
+	t_player	spawn;
+	t_textures	tx;
+	char		**map;
+	int			map_w;
+	int			map_h;
+	int			floor_color;
+	int			ceiling_color;
+	t_tex_paths	paths;
+}				t_world;
 
-void destroy_world(t_world *world);
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	t_image		frame;
+	t_world		world;
+	t_player	player;
+}				t_game;
 
-typedef struct s_raycast {
-    t_vector raydir;
-    t_vector map;
-    t_vector side_dist;
-    t_vector delta_dist;
-    double   perp_wall_dist;
-    int      step_x;
-    int      step_y;
-    int      hit;
-    int      side;
-    int      line_height;
-    int      draw_start;
-    int      draw_end;
-} t_raycast;
+typedef struct s_raycast
+{
+	t_vector	raydir;
+	t_vector	map;
+	t_vector	side_dist;
+	t_vector	delta_dist;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+}				t_raycast;
 
-/* debug */
-//void debug_faces_once(const t_column cols[WIN_W]);
-//void debug_dump_raycast_table(const t_raycast rc[5], const int idx[5]);
-//void cast_rays(const t_game *g, t_column cols[WIN_W], t_raycast rc_debug[5], int idx[5], int n);
+typedef struct s_parse_state
+{
+	int	map_started;
+	int	map_finished;
+	int	map_lines;
+	int	max_width;
+}				t_parse_state;
 
+/* ----- Init / teardown -- */
+int		init_mlx(t_game *g);
+int		init_images(t_game *g);
+int		init_player_from_spawn(t_game *game);
+int		init_textures_from_paths(t_game *g);
+int		init_textures_hardcode(t_game *g);
+int		load_one_xpm(t_game *g, t_image *dst, const char *path);
+int		game_init(t_game *g, const char *map_path);
+void	game_run(t_game *g);
+void	game_destroy(t_game *g);
+void	destroy_world(t_world *world);
+void	free_map(char **map, int h);
 
-/* mlx_init.c */
-int init_mlx(t_game *g);
-int init_images(t_game *g);
-int init_player_from_spawn(t_game *game);
-int init_textures_from_paths(t_game *g);
-
-/* textures */
-int init_textures_hardcode(t_game *g);
-int get_texel(const t_image *tex, int tx, int ty);
-int load_one_xpm(t_game *g, t_image *dst, const char *path);
-int get_tex_y(const t_image *tex, int line_height, int y, int start);
-double compute_wall_x(const t_game *g, const t_raycast *rc);
-int compute_tex_x(const t_game *g, const t_raycast *rc, double wall_x, int face);
-int get_tex_y_from_start(const t_image *tex, int line_height, int y, int start);
-const t_image *get_tex_for_face(const t_textures *tx, int face);
-
-/* render.c */
-void render_frame(t_game *g);
-void clear_frame(t_game *g, int color);
-int close_window(t_game *g);
-void game_destroy(t_game *g);
-int print_usage(void);
-int game_init(t_game *g, const char *map_path);
-void game_run(t_game *g);
-void print_map(t_world *w);
-void my_mlx_pixel_put(t_image *img, int x, int y, int color);
-
-
-
-/*raycasting*/
-
-
-/* raycasting */
-void render_background(t_game *g);
-void draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color);
-void compute_dda_params(const t_game *g, t_raycast *rc);
-void run_dda(const t_game *g, t_raycast *rc);
-void compute_perp_distance(const t_game *g, t_raycast *rc);
-void compute_wall_height(t_raycast *rc);
-int get_face(const t_raycast *rc);
-int hardcode_world(t_world *w);
-void print_world_debug(const t_world *w);
-void fill_column_basic(t_column *col, const t_raycast *rc);
-void fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
-int get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y);
-int	clamp_tex_x(const t_column *col, const t_image *tex);
-int	clamp_draw_end(const t_column *col);
-int	clamp_draw_start(const t_column *col);
+/* ----- Rendering / raycasting --*/
 void	render_frame(t_game *g);
-void render_walls(t_game *g, const t_column cols[WIN_W]);
-void     cast_rays(const t_game *g, t_column cols[WIN_W]);
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void	render_background(t_game *g);
+void	render_walls(t_game *g, const t_column cols[WIN_W]);
+void	cast_rays(const t_game *g, t_column cols[WIN_W]);
+void	clear_frame(t_game *g, int color);
+void	draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color);
+void	compute_dda_params(const t_game *g, t_raycast *rc);
+void	run_dda(const t_game *g, t_raycast *rc);
+void	compute_perp_distance(const t_game *g, t_raycast *rc);
+void	compute_wall_height(t_raycast *rc);
+void	fill_column_basic(t_column *col, const t_raycast *rc);
+void	fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
+int		get_face(const t_raycast *rc);
+int		get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y);
+int		clamp_tex_x(const t_column *col, const t_image *tex);
+int		clamp_draw_start(const t_column *col);
+int		clamp_draw_end(const t_column *col);
+int		get_texel(const t_image *tex, int tx, int ty);
+int		get_tex_y(const t_image *tex, int line_height, int y, int start);
+int		get_tex_y_from_start(const t_image *tex, int line_height, int y, int start);
+const	t_image	*get_tex_for_face(const t_textures *tx, int face);
+double	compute_wall_x(const t_game *g, const t_raycast *rc);
+int		compute_tex_x(const t_game *g, const t_raycast *rc, double wall_x, int face);
 
+/* ----- Parsing --*/
+int		parse_cub(char *path, t_game *game);
+int		parse_line(char *line, t_world *w, t_parse_state *state);
+int		parse_map_line(char *line, t_world *w, t_parse_state *state);
+int		parse_rgb(const char *str, int *out_color);
+int		validate_map(t_world *w);
+int		find_player_spawn(t_world *w);
 
-
-/* parsing */
-void free_map(char **map, int h);
-
-
-/*Movimentation / collision */
+/* ----- Input & gameplay -- */
+int		close_window(t_game *g);
+void	print_map(t_world *w);
+void	print_world_debug(const t_world *w);
 int		handle_input(int key, t_game *g);
 void	move_player(t_game *g, double dx, double dy);
 void	rotate_player(t_game *g, double angle);
 int		is_wall(const t_world *w, double x, double y);
 
-
+/* ----- Utils -- */
+int		clampi(int value, int min, int max);
+int		print_error(char *msg);
+int		print_usage(void);
 
 #endif
