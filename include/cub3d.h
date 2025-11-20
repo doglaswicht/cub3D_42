@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 00:56:55 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:12:52 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define WIN_W       800
 # define WIN_H       600
 # define KEY_ESC     65307
+# define KEY_W       119
+# define KEY_A       97
+# define KEY_S       115
+# define KEY_D       100
+# define KEY_LEFT    65361
+# define KEY_RIGHT   65363
 # define EV_KEYPRESS 2
 # define EV_DESTROY  17
 
@@ -99,6 +105,17 @@ typedef struct s_world
 	t_tex_paths	paths;
 }				t_world;
 
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+	int	esc;
+}				t_keys;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -106,6 +123,7 @@ typedef struct s_game
 	t_image		frame;
 	t_world		world;
 	t_player	player;
+	t_keys		keys;
 }				t_game;
 
 typedef struct s_raycast
@@ -184,7 +202,9 @@ char	*read_line(int fd, int *error);
 int		close_window(t_game *g);
 void	print_map(t_world *w);
 void	print_world_debug(const t_world *w);
-int		handle_input(int key, t_game *g);
+int		key_press(int key, t_game *g);
+int		key_release(int key, t_game *g);
+void	handle_input(t_game *g);
 void	move_player(t_game *g, double dx, double dy);
 void	rotate_player(t_game *g, double angle);
 int		is_wall(const t_world *w, double x, double y);
