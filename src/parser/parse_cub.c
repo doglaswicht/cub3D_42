@@ -6,61 +6,11 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:08:44 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/19 16:43:26 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/20 01:01:13 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static	char	*read_line(int fd, int *error)
-{
-	char	*buffer;
-	size_t	capacity;
-	size_t	length;
-	ssize_t	bytes;
-	char	c;
-
-	buffer = NULL;
-	capacity = 0;
-	length = 0;
-	while (1)
-	{
-		bytes = read(fd, &c, 1);
-		if (bytes < 0)
-		{
-			*error = 1;
-			free(buffer);
-			return (NULL);
-		}
-		if (bytes == 0)
-			break ;
-		if (length + 1 >= capacity)
-		{
-			
-			char	*new_buffer;
-
-			capacity = (capacity == 0) ? 64 : capacity * 2;
-			new_buffer = (char *)realloc(buffer, capacity + 1);
-			if (!new_buffer)
-			{
-				*error = 1;
-				free(buffer);
-				return (NULL);
-			}
-			buffer = new_buffer;
-		}
-		buffer[length++] = c;
-		if (c == '\n')
-			break ;
-	}
-	if (length == 0)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	buffer[length] = '\0';
-	return (buffer);
-}
 
 static	int	finalize_parse(t_world *w, t_parse_state *state)
 {
@@ -77,6 +27,10 @@ static	int	finalize_parse(t_world *w, t_parse_state *state)
 	return (0);
 }
 
+void	initialize_parse_lines(void)
+{
+	
+}
 static	int	parse_lines(int fd, t_world *world)
 {
 	t_parse_state	state;

@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/19 21:07:10 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:56:55 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int		parse_map_line(char *line, t_world *w, t_parse_state *state);
 int		parse_rgb(const char *str, int *out_color);
 int		validate_map(t_world *w);
 int		find_player_spawn(t_world *w);
+char	*read_line(int fd, int *error);
 
 /* ----- Input & gameplay -- */
 int		close_window(t_game *g);
