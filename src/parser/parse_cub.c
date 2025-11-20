@@ -5,14 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 14:08:44 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 01:01:13 by dleite-b         ###   ########.fr       */
+/*   Created: 2025/11/20 01:05:20 by dleite-b          #+#    #+#             */
+/*   Updated: 2025/11/20 01:07:21 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	int	finalize_parse(t_world *w, t_parse_state *state)
+/* --------------------------- FINALIZE PARSE --------------------------- */
+
+static int	finalize_parse(t_world *w, t_parse_state *state)
 {
 	if (!w->paths.no || !w->paths.so || !w->paths.we || !w->paths.ea)
 		return (print_error("Missing texture definition"));
@@ -22,45 +24,59 @@ static	int	finalize_parse(t_world *w, t_parse_state *state)
 		return (print_error("Map section missing"));
 	if (find_player_spawn(w) == -1)
 		return (-1);
-	if (validate_map(w) == -1)
-		return (-1);
-	return (0);
+	return (validate_map(w));
 }
 
-void	initialize_parse_lines(void)
+/* --------------------------- INIT PARSE LINES --------------------------- */
+
+static void	init_parse_state(t_parse_state *s)
 {
-	
+	s->map_started = 0;
+	s->map_finished = 0;
+	s->map_lines = 0;
+	s->max_width = 0;
 }
-static	int	parse_lines(int fd, t_world *world)
+
+/* --------------------------- PROCESS ONE LINE --------------------------- */
+
+static int	process_one_line(char *line, t_world *w, t_parse_state *s)
 {
-	t_parse_state	state;
-	int				error;
+	size_t	len;
+	int		status;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	status = parse_line(line, w, s);
+	free(line);
+	return (status);
+}
+
+/* --------------------------- MAIN LOOP --------------------------- */
+
+static int	parse_lines(int fd, t_world *w)
+{
+	t_parse_state	s;
 	char			*line;
+	int				error;
 	int				status;
-	size_t			len;
 
-	state.map_started = 0;
-	state.map_finished = 0;
-	state.map_lines = 0;
-	state.max_width = 0;
+	init_parse_state(&s);
 	error = 0;
-	while (1)
+	line = read_line(fd, &error);
+	while (line)
 	{
-		line = read_line(fd, &error);
-		if (!line)
-			break ;
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-		status = parse_line(line, world, &state);
-		free(line);
+		status = process_one_line(line, w, &s);
 		if (status == -1)
 			return (-1);
+		line = read_line(fd, &error);
 	}
 	if (error)
 		return (print_error("Failed to read .cub file"));
-	return (finalize_parse(world, &state));
+	return (finalize_parse(w, &s));
 }
+
+/* --------------------------- ENTRY POINT --------------------------- */
 
 int	parse_cub(char *path, t_game *game)
 {
