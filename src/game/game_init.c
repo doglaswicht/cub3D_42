@@ -1,54 +1,58 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/02 13:07:51 by csturny           #+#    #+#             */
+/*   Updated: 2025/12/02 13:07:52 by csturny          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 static int	init_world(t_game *g, const char *map_path)
 {
-    if (!map_path || *map_path == '\0')
-        return (print_error("Missing map path"));
-    if (parse_cub((char *)map_path, g) != 0)
-        return (1);
-    if (init_player_from_spawn(g) != 0)
-        return (1);
-    return (0);
+	if (!map_path || *map_path == '\0')
+		return (print_error("Missing map path"));
+	if (parse_cub((char *)map_path, g) != 0)
+		return (1);
+	if (init_player_from_spawn(g) != 0)
+		return (1);
+	return (0);
 }
 
 static int	init_graphics(t_game *g)
 {
-    if (init_mlx(g) != 0)
-        return (1);
-    if (init_images(g) != 0)
-        return (1);
-    if (init_textures_from_paths(g) != 0)
-        return (1);
-    return (0);
+	if (init_mlx(g) != 0)
+		return (1);
+	if (init_images(g) != 0)
+		return (1);
+	if (init_textures_from_paths(g) != 0)
+		return (1);
+	return (0);
 }
 
 int	game_init(t_game *g, const char *map_path)
 {
-    g->world.floor_color = -1;
-    g->world.ceiling_color = -1;
-   
-	
+	g->world.floor_color = -1;
+	g->world.ceiling_color = -1;
 	g->world.paths.no = NULL;
 	g->world.paths.so = NULL;
 	g->world.paths.we = NULL;
 	g->world.paths.ea = NULL;
-
-    g->mlx = NULL;
-    g->win = NULL;
-    if (init_world(g, map_path) != 0)
-    {
-        game_destroy(g);
-        return (1);
-    }
-    if (init_graphics(g) != 0)
-    {
-        game_destroy(g);
-        return (1);
-    }
-    //printf("CALL DEBUG STATE\n");
-    //debug_dump_state(&g->world, &g->player, map_path);
-    return (0);
+	g->mlx = NULL;
+	g->win = NULL;
+	if (init_world(g, map_path) != 0)
+	{
+		game_destroy(g);
+		return (1);
+	}
+	if (init_graphics(g) != 0)
+	{
+		game_destroy(g);
+		return (1);
+	}
+	return (0);
 }
