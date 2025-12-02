@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 12:12:52 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:17:46 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define KEY_LEFT    65361
 # define KEY_RIGHT   65363
 # define EV_KEYPRESS 2
+# define EV_KEYPRELEASE 3
 # define EV_DESTROY  17
 
 /* ----- Rendering helpers -- */

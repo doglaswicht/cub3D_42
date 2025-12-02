@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 21:21:34 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/02 13:08:15 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/02 15:18:00 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	game_run(t_game *g)
 {
 	mlx_hook(g->win, EV_DESTROY, 0, close_window, g);
 	mlx_hook(g->win, EV_KEYPRESS, 1L << 0, key_press, g);
-	mlx_hook(g->win, 3, 1L << 1, key_release, g);
+	mlx_hook(g->win, EV_KEYPRELEASE, 1L << 1, key_release, g);
 	mlx_loop_hook(g->mlx, game_loop, g);
 	mlx_loop(g->mlx);
 }
