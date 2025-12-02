@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:03 by csturny           #+#    #+#             */
-/*   Updated: 2025/11/18 15:20:54 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:20:02 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,55 +82,21 @@ void	compute_wall_height(t_raycast *rc)
  * @param cols Array of columns to fill (size WIN_W).
  */
 
-void     cast_rays(const t_game *g, t_column cols[WIN_W])
+void	cast_rays(const t_game *g, t_column cols[WIN_W])
 {
-	int         x;
-	t_raycast   rc;
+	int			x;
+	t_raycast	rc;
 
 	x = 0;
 	while (x < WIN_W)
 	{
-		// init
 		init_raycast(&rc, x, g);
-
-		// Préparation DDA (cellule de départ, delta, step, side_dist)
 		compute_dda_params(g, &rc);
-
-		// Boucle DDA : trouver le mur
 		run_dda(g, &rc);
-
-		// Correction "distance du rayon", éviter l'effet fish-eye
 		compute_perp_distance(g, &rc);
-
-		// Calculer la hauteur du mur projeté
 		compute_wall_height(&rc);
-
 		fill_column_basic(&cols[x], &rc);
 		fill_column_tex(g, &cols[x], &rc);
-		
 		x++;
 	}
 }
-
-/*
-// provisoire debug
-void cast_rays(const t_game *g, t_column cols[WIN_W], t_raycast rc_debug[5], int idx[5], int n)
-{
-	int x;
-	t_raycast rc;
-	x = 0;
-	while (x < WIN_W)
-	{
-		init_raycast(&rc, x, g);
-		compute_dda_params(g, &rc);
-		run_dda(g, &rc);
-		compute_perp_distance(g, &rc);
-		compute_wall_height(&rc);
-		fill_column_basic(&cols[x], &rc);
-		fill_column_tex(g, &cols[x], &rc);
-		for (int i = 0; i < n; i++)
-			if (x == idx[i])
-				rc_debug[i] = rc;
-		x++;
-	}
-}*/
