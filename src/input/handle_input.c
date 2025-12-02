@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:32 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 12:27:00 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:54:05 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,22 @@ int	key_release(int key, t_game *g)
 
 void	handle_input(t_game *g)
 {
-	double	move;
-	double	rot;
-
-	move = 0.03;
-	rot = 0.01;
 	if (g->keys.esc)
 		close_window(g);
 	if (g->keys.w)
-		move_player(g, g->player.dir.x * move, g->player.dir.y * move);
+		move_player(g, g->player.dir.x * MOVE_SPEED,
+			g->player.dir.y * MOVE_SPEED);
 	if (g->keys.s)
-		move_player(g, -g->player.dir.x * move, -g->player.dir.y * move);
+		move_player(g, -g->player.dir.x * MOVE_SPEED,
+			-g->player.dir.y * MOVE_SPEED);
 	if (g->keys.a)
-		move_player(g, -g->player.plane.x * move, -g->player.plane.y * move);
+		move_player(g, -g->player.plane.x * MOVE_SPEED,
+			-g->player.plane.y * MOVE_SPEED);
 	if (g->keys.d)
-		move_player(g, g->player.plane.x * move, g->player.plane.y * move);
+		move_player(g, g->player.plane.x * MOVE_SPEED,
+			g->player.plane.y * MOVE_SPEED);
 	if (g->keys.left)
-		rotate_player(g, -rot);
+		rotate_player(g, -ROT_SPEED);
 	if (g->keys.right)
-		rotate_player(g, rot);
+		rotate_player(g, ROT_SPEED);
 }

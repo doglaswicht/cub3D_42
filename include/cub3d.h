@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/02 15:17:46 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/02 15:55:58 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@
 # define EV_KEYPRESS 2
 # define EV_KEYPRELEASE 3
 # define EV_DESTROY  17
+
+/* ----- Player movement & rotation speeds ----- */
+#define MOVE_SPEED 0.06  // lent 0.03
+#define ROT_SPEED  0.025     // lent 0.01  
+
 
 /* ----- Rendering helpers -- */
 # define FACE_NORTH 0
