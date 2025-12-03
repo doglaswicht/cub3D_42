@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/03 15:24:25 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/03 16:24:28 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@
 # define EV_DESTROY  17
 
 /* ----- Player movement & rotation speeds ----- */
-#define MOVE_SPEED 0.06  // lent 0.03
-#define ROT_SPEED  0.025     // lent 0.01  
-
+# define MOVE_SPEED	0.06
+# define ROT_SPEED 	0.025
 
 /* ----- Rendering helpers -- */
 # define FACE_NORTH 0
@@ -158,67 +157,72 @@ typedef struct s_parse_state
 }				t_parse_state;
 
 /* ----- Init / teardown -- */
-int		init_mlx(t_game *g);
-int		init_images(t_game *g);
-int		init_player_from_spawn(t_game *game);
-int		init_textures_from_paths(t_game *g);
-int		init_textures_hardcode(t_game *g);
-int		load_one_xpm(t_game *g, t_image *dst, const char *path);
-int		game_init(t_game *g, const char *map_path);
-void	game_run(t_game *g);
-void	game_destroy(t_game *g);
-void	destroy_world(t_world *world);
-void	free_map(char **map, int h);
+int				init_mlx(t_game *g);
+int				init_images(t_game *g);
+int				init_player_from_spawn(t_game *game);
+int				init_textures_from_paths(t_game *g);
+int				init_textures_hardcode(t_game *g);
+int				load_one_xpm(t_game *g, t_image *dst, const char *path);
+int				game_init(t_game *g, const char *map_path);
+void			game_run(t_game *g);
+void			game_destroy(t_game *g);
+void			destroy_world(t_world *world);
+void			free_map(char **map, int h);
 
 /* ----- Rendering / raycasting --*/
-void	render_frame(t_game *g);
-void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void	render_background(t_game *g);
-void	render_walls(t_game *g, const t_column cols[WIN_W]);
-void	cast_rays(const t_game *g, t_column cols[WIN_W]);
-void	clear_frame(t_game *g, int color);
-void	draw_vertical_line(t_game *g, int x, int y_start, int y_end, int color);
-void	compute_dda_params(const t_game *g, t_raycast *rc);
-void	run_dda(const t_game *g, t_raycast *rc);
-void	compute_perp_distance(const t_game *g, t_raycast *rc);
-void	compute_wall_height(t_raycast *rc);
-void	fill_column_basic(t_column *col, const t_raycast *rc);
-void	fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc);
-int		get_face(const t_raycast *rc);
-int		get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y);
-int		clamp_tex_x(const t_column *col, const t_image *tex);
-int		clamp_draw_start(const t_column *col);
-int		clamp_draw_end(const t_column *col);
-int		get_texel(const t_image *tex, int tx, int ty);
-int		get_tex_y(const t_image *tex, int line_height, int y, int start);
-int		get_tex_y_from_start(const t_image *tex, int line_height, int y, int start);
-const	t_image	*get_tex_for_face(const t_textures *tx, int face);
-double	compute_wall_x(const t_game *g, const t_raycast *rc);
-int		compute_tex_x(const t_game *g, const t_raycast *rc, double wall_x, int face);
+const t_image	*get_tex_for_face(const t_textures *tx, int face);
+void			render_frame(t_game *g);
+void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void			render_background(t_game *g);
+void			render_walls(t_game *g, const t_column cols[WIN_W]);
+void			cast_rays(const t_game *g, t_column cols[WIN_W]);
+void			clear_frame(t_game *g, int color);
+void			compute_dda_params(const t_game *g, t_raycast *rc);
+void			run_dda(const t_game *g, t_raycast *rc);
+void			compute_perp_distance(const t_game *g, t_raycast *rc);
+void			compute_wall_height(t_raycast *rc);
+void			fill_column_basic(t_column *col, const t_raycast *rc);
+void			fill_column_tex(const t_game *g,
+					t_column *col, const t_raycast *rc);
+int				get_face(const t_raycast *rc);
+int				get_shaded_color(const t_column *col,
+					const t_image *tex, int tex_x, int y);
+int				clamp_tex_x(const t_column *col, const t_image *tex);
+int				clamp_draw_start(const t_column *col);
+int				clamp_draw_end(const t_column *col);
+int				get_texel(const t_image *tex, int tx, int ty);
+int				get_tex_y(const t_image *tex,
+					int line_height, int y, int start);
+int				get_tex_y_from_start(const t_image *tex,
+					int line_height, int y, int start);
+
+double			compute_wall_x(const t_game *g, const t_raycast *rc);
+int				compute_tex_x(const t_game *g,
+					const t_raycast *rc, double wall_x, int face);
 
 /* ----- Parsing --*/
-int		parse_cub(char *path, t_game *game);
-int		parse_line(char *line, t_world *w, t_parse_state *state);
-int		parse_map_line(char *line, t_world *w, t_parse_state *state);
-int		parse_rgb(const char *str, int *out_color);
-int		validate_map(t_world *w);
-int		find_player_spawn(t_world *w);
-char	*read_line(int fd, int *error);
+int				parse_cub(char *path, t_game *game);
+int				parse_line(char *line, t_world *w, t_parse_state *state);
+int				parse_map_line(char *line, t_world *w, t_parse_state *state);
+int				parse_rgb(const char *str, int *out_color);
+int				validate_map(t_world *w);
+int				find_player_spawn(t_world *w);
+char			*read_line(int fd, int *error);
 
 /* ----- Input & gameplay -- */
-int		close_window(t_game *g);
-void	print_map(t_world *w);
-void	print_world_debug(const t_world *w);
-int		key_press(int key, t_game *g);
-int		key_release(int key, t_game *g);
-int		handle_input(t_game *g);
-void	move_player(t_game *g, double dx, double dy);
-void	rotate_player(t_game *g, double angle);
-int		is_wall(const t_world *w, double x, double y);
+int				close_window(t_game *g);
+void			print_map(t_world *w);
+void			print_world_debug(const t_world *w);
+int				key_press(int key, t_game *g);
+int				key_release(int key, t_game *g);
+int				handle_input(t_game *g);
+void			move_player(t_game *g, double dx, double dy);
+void			rotate_player(t_game *g, double angle);
+int				is_wall(const t_world *w, double x, double y);
 
 /* ----- Utils -- */
-int		clampi(int value, int min, int max);
-int		print_error(char *msg);
-int		print_usage(void);
+int				clampi(int value, int min, int max);
+int				print_error(char *msg);
+int				print_usage(void);
 
 #endif
