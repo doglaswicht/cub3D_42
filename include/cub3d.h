@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/02 15:55:58 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/03 15:24:25 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			need_redraw;
 	t_image		frame;
 	t_world		world;
 	t_player	player;
@@ -210,7 +211,7 @@ void	print_map(t_world *w);
 void	print_world_debug(const t_world *w);
 int		key_press(int key, t_game *g);
 int		key_release(int key, t_game *g);
-void	handle_input(t_game *g);
+int		handle_input(t_game *g);
 void	move_player(t_game *g, double dx, double dy);
 void	rotate_player(t_game *g, double angle);
 int		is_wall(const t_world *w, double x, double y);

@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:07:51 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/02 13:07:52 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/03 15:46:36 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	game_init(t_game *g, const char *map_path)
 	g->world.paths.ea = NULL;
 	g->mlx = NULL;
 	g->win = NULL;
+	g->need_redraw = 1;
 	if (init_world(g, map_path) != 0)
 	{
 		game_destroy(g);

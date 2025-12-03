@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:03 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/02 13:20:02 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/02 19:21:18 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	compute_wall_height(t_raycast *rc)
 		rc->draw_end = WIN_H - 1;
 }
 
-// calcule les rayons. pour une colone x
-// tout les calule par colone de gauche a droite
 /**
  * @brief Casts all rays for the current frame and fills the columns array.
  * @param g Pointer to the game state.

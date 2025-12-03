@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:32 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/02 15:54:05 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/03 15:42:12 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,57 @@ int	key_release(int key, t_game *g)
 	return (0);
 }
 
-void	handle_input(t_game *g)
+static int	handle_move_keys(t_game *g)
+{
+	if (g->keys.w)
+	{
+		move_player(g, g->player.dir.x * MOVE_SPEED,
+			g->player.dir.y * MOVE_SPEED);
+		return (1);
+	}
+	if (g->keys.s)
+	{
+		move_player(g, -g->player.dir.x * MOVE_SPEED,
+			-g->player.dir.y * MOVE_SPEED);
+		return (1);
+	}
+	if (g->keys.a)
+	{
+		move_player(g, -g->player.plane.x * MOVE_SPEED,
+			-g->player.plane.y * MOVE_SPEED);
+		return (1);
+	}
+	if (g->keys.d)
+	{
+		move_player(g, g->player.plane.x * MOVE_SPEED,
+			g->player.plane.y * MOVE_SPEED);
+		return (1);
+	}
+	return (0);
+}
+
+static int	handle_rotate_keys(t_game *g)
+{
+	if (g->keys.left)
+	{
+		rotate_player(g, -ROT_SPEED);
+		return (1);
+	}
+	if (g->keys.right)
+	{
+		rotate_player(g, ROT_SPEED);
+		return (1);
+	}
+	return (0);
+}
+
+int	handle_input(t_game *g)
 {
 	if (g->keys.esc)
 		close_window(g);
-	if (g->keys.w)
-		move_player(g, g->player.dir.x * MOVE_SPEED,
-			g->player.dir.y * MOVE_SPEED);
-	if (g->keys.s)
-		move_player(g, -g->player.dir.x * MOVE_SPEED,
-			-g->player.dir.y * MOVE_SPEED);
-	if (g->keys.a)
-		move_player(g, -g->player.plane.x * MOVE_SPEED,
-			-g->player.plane.y * MOVE_SPEED);
-	if (g->keys.d)
-		move_player(g, g->player.plane.x * MOVE_SPEED,
-			g->player.plane.y * MOVE_SPEED);
-	if (g->keys.left)
-		rotate_player(g, -ROT_SPEED);
-	if (g->keys.right)
-		rotate_player(g, ROT_SPEED);
+	if (handle_move_keys(g))
+		return (1);
+	if (handle_rotate_keys(g))
+		return (1);
+	return (0);
 }

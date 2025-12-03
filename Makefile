@@ -47,9 +47,11 @@ $(NAME): $(OBJ)
 clean:
 	rm -f $(OBJ)
 	$(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C libft fclean
 
 re: fclean all
 
