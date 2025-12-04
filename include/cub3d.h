@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 11:29:30 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 15:01:09 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ int				init_mlx(t_game *g);
 int				init_images(t_game *g);
 int				init_player_from_spawn(t_game *game);
 int				init_textures_from_paths(t_game *g);
-int				init_textures_hardcode(t_game *g);
 int				load_one_xpm(t_game *g, t_image *dst, const char *path);
 int				game_init(t_game *g, const char *map_path);
 void			game_run(t_game *g);
