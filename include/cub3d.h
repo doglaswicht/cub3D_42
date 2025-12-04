@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 15:01:09 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 15:03:09 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void			render_background(t_game *g);
 void			render_walls(t_game *g, const t_column cols[WIN_W]);
 void			cast_rays(const t_game *g, t_column cols[WIN_W]);
-void			clear_frame(t_game *g, int color);
 void			compute_dda_params(const t_game *g, t_raycast *rc);
 void			run_dda(const t_game *g, t_raycast *rc);
 void			compute_perp_distance(const t_game *g, t_raycast *rc);
