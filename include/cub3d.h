@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/03 16:24:28 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/04 11:29:30 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define EV_DESTROY  17
 
 /* ----- Player movement & rotation speeds ----- */
-# define MOVE_SPEED	0.06
+# define MOVE_SPEED	0.03
 # define ROT_SPEED 	0.025
 
 /* ----- Rendering helpers -- */
@@ -224,5 +224,7 @@ int				is_wall(const t_world *w, double x, double y);
 int				clampi(int value, int min, int max);
 int				print_error(char *msg);
 int				print_usage(void);
+char			*skip_spaces(char *str);
+
 
 #endif

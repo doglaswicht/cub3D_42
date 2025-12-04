@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 21:21:34 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/03 15:32:25 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/04 11:08:46 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	game_loop(void *param)
 	t_game	*g;
 
 	g = (t_game *)param;
-
-	// mise a jourddes inputs
 	if (handle_input(g))
 		g->need_redraw = 1;
 	if (g->need_redraw)
@@ -27,9 +25,7 @@ int	game_loop(void *param)
 		g->need_redraw = 0;
 	}
 	else
-    {
-        usleep(10000); // 10 ms = 0.01s, réduit la charge CPU en idle
-    }
+		usleep(10000);
 	return (0);
 }
 

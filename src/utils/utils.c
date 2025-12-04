@@ -6,38 +6,46 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:56:05 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/19 20:43:01 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:28:59 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int print_error(char *msg)
+char	*skip_spaces(char *str)
 {
-    printf("Error\n%s\n", msg);
-    return (-1);
+    while (*str == ' ')
+        str++;
+    return (str);
 }
 
-void    free_map(char **map, int h)
+int	print_error(char *msg)
 {
-	if (!map) return;
+	printf("Error\n%s\n", msg);
+	return (-1);
+}
+
+void	free_map(char **map, int h)
+{
+	if (!map)
+		return;
 	for (int i = 0; i < h; i++)
-		free(map[i]);
+			free(map[i]);
 	free(map);
 }
 
-int print_usage(void)
+int	print_usage(void)
 {
-    printf("Usage: ./cub3d <map_file.cub>\n");
+	printf("Usage: ./cub3d <map_file.cub>\n");
 	return (1);
 }
 
 // --- util: clamp entier ---
-int clampi(int value, int min, int max)
+int	clampi(int value, int min, int max)
 {
-    if (value < min)
-        return min;
-    if (value > max)
-        return max;
-    return value;
+	if (value < min)
+		return min;
+	if (value > max)
+		return max;
+	return value;
 }

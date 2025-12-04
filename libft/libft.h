@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 17:23:37 by csturny           #+#    #+#             */
-/*   Updated: 2025/01/22 10:08:00 by csturny          ###   ########.fr       */
+/*   Created: 2025/12/04 10:59:29 by dleite-b          #+#    #+#             */
+/*   Updated: 2025/12/04 10:59:29 by dleite-b         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -53,6 +53,6 @@ int		ft_toupper(int c);
 
 /* --- ajout apres rendu cercle 0 --------*/
 char	*get_next_line(int fd);
-int	ft_atoi_base(const char *str, int str_base);
+int		ft_atoi_base(const char *str, int str_base);
 
 #endif

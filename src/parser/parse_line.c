@@ -6,18 +6,11 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:09:46 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/19 16:47:52 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:29:53 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static	char	*skip_spaces(char *str)
-{
-	while (*str == ' ')
-		str++;
-	return (str);
-}
 
 static	int	is_map_line(char *str)
 {

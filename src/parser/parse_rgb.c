@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:11:09 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 01:11:27 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:36:35 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ static	int	parse_component(const char **str, int *component)
 	return (0);
 }
 
+static	int	check_trailing_chars(const char *str)
+{
+	while (*str == ' ')
+		str++;
+	if (*str != '\0')
+		return (print_error("Unexpected characters after RGB value"));
+	return (0);
+}
+
 int	parse_rgb(const char *str, int *out_color)
 {
 	int	r;
@@ -54,13 +63,8 @@ int	parse_rgb(const char *str, int *out_color)
 	str++;
 	if (parse_component(&str, &b) == -1)
 		return (-1);
-	if (*str != '\0')
-	{
-		while (*str == ' ')
-			str++;
-		if (*str != '\0')
-			return (print_error("Unexpected characters after RGB value"));
-	}
+	if (check_trailing_chars(str) == -1)
+		return (-1);
 	*out_color = (r << 16) | (g << 8) | b;
 	return (0);
 }
