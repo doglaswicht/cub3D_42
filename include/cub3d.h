@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 15:03:09 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 15:14:24 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,6 @@ char			*read_line(int fd, int *error);
 
 /* ----- Input & gameplay -- */
 int				close_window(t_game *g);
-void			print_map(t_world *w);
 void			print_world_debug(const t_world *w);
 int				key_press(int key, t_game *g);
 int				key_release(int key, t_game *g);
