@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:57 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 11:30:27 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 14:22:48 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-	/* rotaciona vetor direcao*/
-	/*rotaciona plano da camera FOV */
+
+/**
+ * @brief Rotates the player's direction and camera plane by a given angle.
+ * @param g Pointer to the game state.
+ * @param angle Rotation angle in radians (positive: right, negative: left).
+ *
+ * Applies a 2D rotation to the direction and plane vectors 
+ * using the given angle.
+ * This changes the player's facing direction and field of view orientation.
+ */
 void	rotate_player(t_game *g, double angle)
 {
 	double	old_dir_x;

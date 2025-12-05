@@ -3,19 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:45 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 11:27:35 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 14:22:15 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-* Test colision X et Y
-*/
-
+/**
+ * @brief Moves the player by (dx, dy) if there is no wall collision.
+ * @param g Pointer to the game state.
+ * @param dx Delta movement in X direction.
+ * @param dy Delta movement in Y direction.
+ *
+ * Checks for wall collisions separately on X and Y axes,
+ * and updates the player's position if the move is valid.
+ */
 void	move_player(t_game *g, double dx, double dy)
 {
 	double	new_x;

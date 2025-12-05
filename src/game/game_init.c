@@ -6,12 +6,20 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:07:51 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/03 15:46:36 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 14:15:11 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief Initializes the game world from the map file.
+ * @param g Pointer to the game state.
+ * @param map_path Path to the .cub map file.
+ * @return 0 on success, 1 on error.
+ *
+ * Parses the map, initializes the world and player spawn.
+ */
 static int	init_world(t_game *g, const char *map_path)
 {
 	if (!map_path || *map_path == '\0')
@@ -23,6 +31,13 @@ static int	init_world(t_game *g, const char *map_path)
 	return (0);
 }
 
+/**
+ * @brief Initializes the graphics context and images.
+ * @param g Pointer to the game state.
+ * @return 0 on success, 1 on error.
+ *
+ * Initializes MLX, frame image, and wall textures.
+ */
 static int	init_graphics(t_game *g)
 {
 	if (init_mlx(g) != 0)
@@ -34,6 +49,15 @@ static int	init_graphics(t_game *g)
 	return (0);
 }
 
+/**
+ * @brief Initializes the entire game state and resources.
+ * @param g Pointer to the game state.
+ * @param map_path Path to the .cub map file.
+ * @return 0 on success, 1 on error.
+ *
+ * Sets default values, initializes world and graphics.
+ * Destroys resources and returns error if any step fails.
+ */
 int	game_init(t_game *g, const char *map_path)
 {
 	g->world.floor_color = -1;

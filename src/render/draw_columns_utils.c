@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:14 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/05 13:08:29 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 14:28:57 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,17 @@ int	clamp_tex_x(const t_column *col, const t_image *tex)
 }
 
 /**
- * @brief Returns the shaded color for a wall pixel.
+ * @brief Gets the color for a wall pixel, with optional shading.
  * @param col Pointer to the column data (contains wall info).
  * @param tex Pointer to the texture image.
  * @param tex_x X coordinate in the texture.
  * @param y Y coordinate on the screen (current pixel).
- * @return The (possibly shaded) color value for the pixel.
+ * @return The color value for the pixel (shaded if ENABLE_SHADING is defined).
  *
  * Computes the Y coordinate in the texture, reads the texel color,
- * and applies shading if the wall side is 1 (vertical wall).
+ * and applies shading if the wall side is 1 (vertical wall) 
+ * and ENABLE_SHADING is defined.
  */
-/*
-int	get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y)
-{
-	int	color;
-	int	tex_y;
-
-	tex_y = get_tex_y_from_start(tex, col->line_height, y,
-			clamp_draw_start(col));
-	color = get_texel(tex, tex_x, tex_y);
-	if (col->side == 1)
-		color = (color >> 1) & 0x7F7F7F;
-	return (color);
-}*/
-
 #ifdef ENABLE_SHADING
 
 int	get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y)

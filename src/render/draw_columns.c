@@ -5,120 +5,77 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/16 13:39:21 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/05 12:25:32 by csturny          ###   ########.fr       */
+/*   Created: 2025/12/05 15:04:54 by csturny           #+#    #+#             */
+/*   Updated: 2025/12/05 15:05:23 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	render_wall_slice(t_game *g, int x, const t_column *col)
+/**
+ * @brief Initializes the t_wall_vars structure for rendering a wall column.
+ *
+ * Computes and clamps the drawing bounds, texture X coordinate,
+ * and prepares direct buffer access.
+ * @param v Pointer to the structure to fill.
+ * @param g Pointer to the game structure (frame buffer).
+ * @param col Pointer to the column to render (raycasting info).
+ * @param tex Pointer to the texture to use.
+ */
+static void	init_wall_vars(t_wall_vars *v, t_game *g, const t_column *col,
+		const t_image *tex)
 {
-	const t_image	*tex;
-	t_wall_vars		v;
-
-	tex = get_tex_for_face(&g->world.tx, col->face);
-	if (!tex || !tex->addr || col->line_height <= 0)
-		return ;
-	v.start = clamp_draw_start(col);
-	v.end = clamp_draw_end(col);
-	v.tex_x = clamp_tex_x(col, tex);
-	v.pixels = (int *)g->frame.addr;
-	v.line_len = g->frame.line_len / 4;
-	for (v.y = v.start; v.y <= v.end; v.y++)
-		v.pixels[v.y * v.line_len + x] = get_shaded_color(col, tex, v.tex_x, v.y);
+	if (col->draw_start < 0)
+		v->start = 0;
+	else
+		v->start = col->draw_start;
+	if (col->draw_end >= WIN_H)
+		v->end = WIN_H - 1;
+	else
+		v->end = col->draw_end;
+	v->tex_x = col->tex_x;
+	if (v->tex_x < 0)
+		v->tex_x = 0;
+	if (v->tex_x >= tex->w)
+		v->tex_x = tex->w - 1;
+	v->y = v->start;
+	v->pixels = (int *)g->frame.addr;
+	v->line_len = g->frame.line_len / 4;
 }
 
-
 /**
- * @brief Renders a vertical wall slice for a given column.
- * @param g Pointer to the game state.
- * @param x X coordinate of the column on the screen.
- * @param col Pointer to the column rendering info.
+ * @brief Draws a single wall column on the screen (vertical slice rendering).
  *
- * Draws the wall segment for the column using texture mapping and shading.
- * Selects the correct texture, clamps coordinates, and draws each pixel.
+ * Uses direct buffer access for performance. Applies shading if enabled.
+ * @param g Pointer to the game structure (frame buffer).
+ * @param x Index of the column to draw (screen X coordinate).
+ * @param col Pointer to the column to render (raycasting info).
  */
-/*
 static void	render_wall_slice(t_game *g, int x, const t_column *col)
 {
+	t_wall_vars		v;
+	int				color;
 	const t_image	*tex;
-	int				start;
-	int				end;
-	int				tex_x;
-	int				y;
 
 	tex = get_tex_for_face(&g->world.tx, col->face);
 	if (!tex || !tex->addr || col->line_height <= 0)
 		return ;
-	start = clamp_draw_start(col);
-	end = clamp_draw_end(col);
-	tex_x = clamp_tex_x(col, tex);
-	y = start;
-	while (y <= end)
+	init_wall_vars(&v, g, col, tex);
+	while (v.y <= v.end)
 	{
-		my_mlx_pixel_put(&g->frame, x, y,
-			get_shaded_color(col, tex, tex_x, y));
-		y++;
+		color = get_shaded_color(col, tex, v.tex_x, v.y);
+		v.pixels[v.y * v.line_len + x] = color;
+		v.y++;
 	}
-}*/
-
-
+}
 
 /**
- * @brief Renders a vertical wall slice for a given column.
- * @param g Pointer to the game state.
- * @param col Pointer to the column rendering info.
+ * @brief Draws all wall columns on the screen (main rendering loop).
  *
- * Draws the wall segment for the column using texture mapping or solid color.
- */
-
-/*
-static void render_wall_slice(t_game *g, int x, const t_column *col)
-{
-	const t_image *tex = get_tex_for_face(&g->world.tx, col->face);
-	if (!tex || !tex->addr || col->line_height <= 0)
-		return;
-
-	int start;
-	int end;
-	int tex_x;
-	int y;
-
-	if (col->draw_start < 0)
-		start = 0;
-	else
-		start = col->draw_start;
-
-	if (col->draw_end >= WIN_H)
-		end = WIN_H - 1;
-	else
-		end = col->draw_end;
-
-	tex_x = col->tex_x;
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= tex->w)
-		tex_x = tex->w - 1;
-
-	y = start;
-	while (y <= end)
-	{
-		int tex_y = get_tex_y_from_start(tex, col->line_height, y, start);
-		int color = get_texel(tex, tex_x, tex_y);
-		if (col->side == 1)
-			color = (color >> 1) & 0x7F7F7F; // ici shading 
-		my_mlx_pixel_put(&g->frame, x, y, color);
-		y++;
-	}
-}*/
-
-/**
- * @brief Draws all wall columns for the current frame.
- * @param g Pointer to the game state.
- * @param cols Array of column rendering info (size WIN_W).
- *
- * Iterates over all columns and calls render_wall_slice for each.
+ * Loops over the entire window width and calls render_wall_slice 
+ * for each column.
+ * @param g Pointer to the game structure (frame buffer).
+ * @param cols Array of columns to render (size WIN_W).
  */
 void	render_walls(t_game *g, const t_column cols[WIN_W])
 {

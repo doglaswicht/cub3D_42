@@ -6,42 +6,20 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:32 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/05 13:42:29 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 14:20:03 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-t		handle_input(int key, t_game *g)
-{
-	double move_speed;
-	double rot_speed;
-
-	move_speed = 0.15;
-	rot_speed = 0.08;
-	if (key == 65307)
-		return (close_window(g));
-	if (key == 'w')
-		move_player(g, g->player.dir.x * move_speed,
-			g->player.dir.y * move_speed);
-	if (key == 's')
-		move_player(g, -g->player.dir.x * move_speed,
-			-g->player.dir.y * move_speed);
-	if (key == 'a')
-		move_player(g, -g->player.plane.x * move_speed,
-			-g->player.plane.y * move_speed);
-	if (key == 'd')
-		move_player(g, g->player.plane.x * move_speed,
-			g->player.plane.y * move_speed);
-	if (key == 65361)
-		rotate_player(g, -rot_speed);
-	if (key == 65363)
-		rotate_player(g, rot_speed);
-	return (0);
-}
-*/
-
+/**
+ * @brief Handles key press events and updates the game key state.
+ * @param key Key code pressed.
+ * @param g Pointer to the game state.
+ * @return Always returns 0.
+ *
+ * Sets the corresponding key flag in the game state to 1.
+ */
 int	key_press(int key, t_game *g)
 {
 	if (key == KEY_ESC)
@@ -61,6 +39,14 @@ int	key_press(int key, t_game *g)
 	return (0);
 }
 
+/**
+ * @brief Handles key release events and updates the game key state.
+ * @param key Key code released.
+ * @param g Pointer to the game state.
+ * @return Always returns 0.
+ *
+ * Sets the corresponding key flag in the game state to 0.
+ */
 int	key_release(int key, t_game *g)
 {
 	if (key == KEY_ESC)
@@ -79,68 +65,19 @@ int	key_release(int key, t_game *g)
 		g->keys.right = 0;
 	return (0);
 }
-/*
-static int	handle_move_keys(t_game *g)
-{
-	if (g->keys.w)
-	{
-		move_player(g, g->player.dir.x * MOVE_SPEED,
-			g->player.dir.y * MOVE_SPEED);
-		return (1);
-	}
-	if (g->keys.s)
-	{
-		move_player(g, -g->player.dir.x * MOVE_SPEED,
-			-g->player.dir.y * MOVE_SPEED);
-		return (1);
-	}
-	if (g->keys.a)
-	{
-		move_player(g, -g->player.plane.x * MOVE_SPEED,
-			-g->player.plane.y * MOVE_SPEED);
-		return (1);
-	}
-	if (g->keys.d)
-	{
-		move_player(g, g->player.plane.x * MOVE_SPEED,
-			g->player.plane.y * MOVE_SPEED);
-		return (1);
-	}
-	return (0);
-}
 
-static int	handle_rotate_keys(t_game *g)
-{
-	if (g->keys.left)
-	{
-		rotate_player(g, -ROT_SPEED);
-		return (1);
-	}
-	if (g->keys.right)
-	{
-		rotate_player(g, ROT_SPEED);
-		return (1);
-	}
-	return (0);
-}
-
-int	handle_input(t_game *g)
-{
-	if (g->keys.esc)
-		close_window(g);
-	if (handle_move_keys(g))
-		return (1);
-	if (handle_rotate_keys(g))
-		return (1);
-	return (0);
-}
-*/
-
-
-
+/**
+ * @brief Handles rotation input and applies rotation to the player.
+ * @param g Pointer to the game state.
+ * @return 1 if rotation occurred, 0 otherwise.
+ *
+ * Rotates the player left or right if the corresponding key is pressed.
+ */
 static int	handle_rotate(t_game *g)
 {
-	int changed = 0;
+	int	changed;
+
+	changed = 0;
 	if (g->keys.left)
 	{
 		rotate_player(g, -ROT_SPEED);
@@ -154,9 +91,18 @@ static int	handle_rotate(t_game *g)
 	return (changed);
 }
 
+/**
+ * @brief Handles all input and applies movement/rotation.
+ * @param g Pointer to the game state.
+ * @return 1 if any action occurred, 0 otherwise.
+ *
+ * Closes the window if ESC is pressed, applies movement and rotation.
+ */
 int	handle_input(t_game *g)
 {
-	int changed = 0;
+	int	changed;
+
+	changed = 0;
 	if (g->keys.esc)
 		close_window(g);
 	if (handle_move(g))

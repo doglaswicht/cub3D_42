@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:40:31 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 01:19:12 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 14:17:45 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-** Retorna 1 se (x, y) é um muro OU está fora do mapa
-*/
+/**
+ * @brief Checks if a given (x, y) position is a wall or out of bounds.
+ * @param w Pointer to the world structure.
+ * @param x X coordinate (double, will be cast to int).
+ * @param y Y coordinate (double, will be cast to int).
+ * @return 1 if the position is a wall or out of the map, 0 otherwise.
+ *
+ * Returns 1 if the coordinates are outside the map, the line is missing,
+ * the position is beyond the line length, or the cell is a wall ('1').
+ */
 int	is_wall(const t_world *w, double x, double y)
 {
 	int	mx;
