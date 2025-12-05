@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:11:09 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 11:36:35 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 11:16:49 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int	parse_rgb(const char *str, int *out_color)
 	int	g;
 	int	b;
 
+	r = 0;
+	g = 0;
+	b = 0;
 	if (!str || !out_color)
 		return (print_error("Invalid RGB pointer"));
 	if (parse_component(&str, &r) == -1)

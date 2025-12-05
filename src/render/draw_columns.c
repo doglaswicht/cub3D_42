@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   draw_columns.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:21 by csturny           #+#    #+#             */
-/*   Updated: 2025/11/18 15:35:15 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 12:25:32 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	render_wall_slice(t_game *g, int x, const t_column *col)
+{
+	const t_image	*tex;
+	t_wall_vars		v;
+
+	tex = get_tex_for_face(&g->world.tx, col->face);
+	if (!tex || !tex->addr || col->line_height <= 0)
+		return ;
+	v.start = clamp_draw_start(col);
+	v.end = clamp_draw_end(col);
+	v.tex_x = clamp_tex_x(col, tex);
+	v.pixels = (int *)g->frame.addr;
+	v.line_len = g->frame.line_len / 4;
+	for (v.y = v.start; v.y <= v.end; v.y++)
+		v.pixels[v.y * v.line_len + x] = get_shaded_color(col, tex, v.tex_x, v.y);
+}
+
 
 /**
  * @brief Renders a vertical wall slice for a given column.
@@ -21,6 +39,7 @@
  * Draws the wall segment for the column using texture mapping and shading.
  * Selects the correct texture, clamps coordinates, and draws each pixel.
  */
+/*
 static void	render_wall_slice(t_game *g, int x, const t_column *col)
 {
 	const t_image	*tex;
@@ -42,7 +61,9 @@ static void	render_wall_slice(t_game *g, int x, const t_column *col)
 			get_shaded_color(col, tex, tex_x, y));
 		y++;
 	}
-}
+}*/
+
+
 
 /**
  * @brief Renders a vertical wall slice for a given column.

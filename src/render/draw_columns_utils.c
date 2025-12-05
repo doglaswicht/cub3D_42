@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:14 by csturny           #+#    #+#             */
-/*   Updated: 2025/11/16 13:39:15 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 13:08:29 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,22 @@ int	clamp_tex_x(const t_column *col, const t_image *tex)
  * Computes the Y coordinate in the texture, reads the texel color,
  * and applies shading if the wall side is 1 (vertical wall).
  */
+/*
+int	get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y)
+{
+	int	color;
+	int	tex_y;
+
+	tex_y = get_tex_y_from_start(tex, col->line_height, y,
+			clamp_draw_start(col));
+	color = get_texel(tex, tex_x, tex_y);
+	if (col->side == 1)
+		color = (color >> 1) & 0x7F7F7F;
+	return (color);
+}*/
+
+#ifdef ENABLE_SHADING
+
 int	get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y)
 {
 	int	color;
@@ -74,3 +90,16 @@ int	get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y)
 		color = (color >> 1) & 0x7F7F7F;
 	return (color);
 }
+#else
+
+int	get_shaded_color(const t_column *col, const t_image *tex, int tex_x, int y)
+{
+	int	color;
+	int	tex_y;
+
+	tex_y = get_tex_y_from_start(tex, col->line_height, y,
+			clamp_draw_start(col));
+	color = get_texel(tex, tex_x, tex_y);
+	return (color);
+}
+#endif

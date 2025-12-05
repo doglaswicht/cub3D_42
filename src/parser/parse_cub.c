@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 01:05:20 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/20 01:07:21 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 11:28:56 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int	process_one_line(char *line, t_world *w, t_parse_state *s)
 }
 
 /* --------------------------- MAIN LOOP --------------------------- */
-
 static int	parse_lines(int fd, t_world *w)
 {
 	t_parse_state	s;

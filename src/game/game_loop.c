@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 21:21:34 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 11:08:46 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 11:30:57 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+#include <sys/time.h> // a suptimer 
+/*
+// version originale
 int	game_loop(void *param)
 {
 	t_game	*g;
@@ -22,6 +24,29 @@ int	game_loop(void *param)
 	if (g->need_redraw)
 	{
 		render_frame(g);
+		g->need_redraw = 0;
+	}
+	else
+		usleep(10000);
+	return (0);
+}*/
+
+//version test performance
+int	game_loop(void *param)
+{
+	t_game	*g;
+
+	g = (t_game *)param;
+	if (handle_input(g))
+		g->need_redraw = 1;
+	if (g->need_redraw)
+	{
+		struct timeval start, end;
+		gettimeofday(&start, NULL);
+		render_frame(g);
+		gettimeofday(&end, NULL);
+		printf("Frame time: %ld us\n",
+			(end.tv_sec - start.tv_sec) * 1000000L + (end.tv_usec - start.tv_usec));
 		g->need_redraw = 0;
 	}
 	else

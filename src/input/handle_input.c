@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:32 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/03 15:42:12 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 13:42:29 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	key_release(int key, t_game *g)
 		g->keys.right = 0;
 	return (0);
 }
-
+/*
 static int	handle_move_keys(t_game *g)
 {
 	if (g->keys.w)
@@ -133,4 +133,35 @@ int	handle_input(t_game *g)
 	if (handle_rotate_keys(g))
 		return (1);
 	return (0);
+}
+*/
+
+
+
+static int	handle_rotate(t_game *g)
+{
+	int changed = 0;
+	if (g->keys.left)
+	{
+		rotate_player(g, -ROT_SPEED);
+		changed = 1;
+	}
+	if (g->keys.right)
+	{
+		rotate_player(g, ROT_SPEED);
+		changed = 1;
+	}
+	return (changed);
+}
+
+int	handle_input(t_game *g)
+{
+	int changed = 0;
+	if (g->keys.esc)
+		close_window(g);
+	if (handle_move(g))
+		changed = 1;
+	if (handle_rotate(g))
+		changed = 1;
+	return (changed);
 }

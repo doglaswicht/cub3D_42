@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 15:15:57 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/05 13:59:36 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@
 # include "libft.h"
 
 /* ----- Window & input -- */
+//# define ENABLE_SHADING
 # define WIN_W       800
 # define WIN_H       600
+
+/* ----- Window & input -- */
 # define KEY_ESC     65307
 # define KEY_W       119
 # define KEY_A       97
@@ -156,6 +159,23 @@ typedef struct s_parse_state
 	int	max_width;
 }				t_parse_state;
 
+typedef struct s_wall_vars
+{
+	int	start;
+	int	end;
+	int	tex_x;
+	int	y;
+	int	*pixels;
+	int	line_len;
+}	t_wall_vars;
+
+typedef struct s_bg_vars {
+    int y;
+    int *pixels;
+    int line_len;
+    int half_h;
+} t_bg_vars;
+
 /* ----- Init / teardown -- */
 int				init_mlx(t_game *g);
 int				init_images(t_game *g);
@@ -213,6 +233,7 @@ void			print_world_debug(const t_world *w);
 int				key_press(int key, t_game *g);
 int				key_release(int key, t_game *g);
 int				handle_input(t_game *g);
+int				handle_move(t_game *g);
 void			move_player(t_game *g, double dx, double dy);
 void			rotate_player(t_game *g, double angle);
 int				is_wall(const t_world *w, double x, double y);
