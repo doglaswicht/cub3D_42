@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:38:44 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/05 15:12:31 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 18:17:05 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
  * @brief Fills a row of pixels with a given color.
  *
  * Writes the specified color to each pixel in the row.
- * @param row Pointer to the start of the row in the image buffer.
- * @param w Number of pixels to fill.
- * @param color The color value to write.
+ * @param row_start Pointer to the start of the row in the image buffer.
+ * @param row_width Number of pixels (width) to fill in the row.
+ * @param fill_color The color value to write.
  */
-static void	fill_row(int *row, int w, int color)
+static void	fill_row(int *row_start, int row_width, int fill_color)
 {
-	int	x;
+	int	col_index;
 
-	x = 0;
-	while (x < w)
+	col_index = 0;
+	while (col_index < row_width)
 	{
-		row[x] = color;
-		x++;
+		row_start[col_index] = fill_color;
+		col_index++;
 	}
 }
 
@@ -45,20 +45,21 @@ void	render_background(t_game *g)
 {
 	t_bg_vars	v;
 
-	v.pixels = (int *)g->frame.addr;
-	v.line_len = g->frame.line_len / 4;
-	v.half_h = g->frame.h / 2;
-	v.y = 0;
-	while (v.y < v.half_h)
+	v.pixels_buffer = (int *)g->frame.addr;
+	v.pixels_per_row = g->frame.line_len / 4;
+	v.half_height = g->frame.h / 2;
+	v.row_index = 0;
+	while (v.row_index < v.half_height)
 	{
-		fill_row(v.pixels + v.y * v.line_len, g->frame.w,
+		fill_row(v.pixels_buffer + v.row_index * v.pixels_per_row, g->frame.w,
 			g->world.ceiling_color);
-		v.y++;
+		v.row_index++;
 	}
-	v.y = v.half_h;
-	while (v.y < g->frame.h)
+	v.row_index = v.half_height;
+	while (v.row_index < g->frame.h)
 	{
-		fill_row(v.pixels + v.y * v.line_len, g->frame.w, g->world.floor_color);
-		v.y++;
+		fill_row(v.pixels_buffer + v.row_index * v.pixels_per_row,
+			g->frame.w, g->world.floor_color);
+		v.row_index++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/05 13:59:36 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 18:38:00 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,20 +161,21 @@ typedef struct s_parse_state
 
 typedef struct s_wall_vars
 {
-	int	start;
-	int	end;
-	int	tex_x;
-	int	y;
-	int	*pixels;
-	int	line_len;
+	int	draw_start;
+	int	draw_end;
+	int	texture_x;
+	int	current_row;
+	int	*pixels_buffer;
+	int	pixels_per_row;
 }	t_wall_vars;
 
-typedef struct s_bg_vars {
-    int y;
-    int *pixels;
-    int line_len;
-    int half_h;
-} t_bg_vars;
+typedef struct s_bg_vars
+{
+	int	row_index;
+	int	*pixels_buffer;
+	int	pixels_per_row;
+	int	half_height;
+}	t_bg_vars;
 
 /* ----- Init / teardown -- */
 int				init_mlx(t_game *g);
@@ -191,7 +192,6 @@ void			free_map(char **map, int h);
 /* ----- Rendering / raycasting --*/
 const t_image	*get_tex_for_face(const t_textures *tx, int face);
 void			render_frame(t_game *g);
-void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void			render_background(t_game *g);
 void			render_walls(t_game *g, const t_column cols[WIN_W]);
 void			cast_rays(const t_game *g, t_column cols[WIN_W]);

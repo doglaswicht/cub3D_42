@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:04:54 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/05 15:05:23 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/05 18:39:10 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ static void	init_wall_vars(t_wall_vars *v, t_game *g, const t_column *col,
 		const t_image *tex)
 {
 	if (col->draw_start < 0)
-		v->start = 0;
+		v->draw_start = 0;
 	else
-		v->start = col->draw_start;
+		v->draw_start = col->draw_start;
 	if (col->draw_end >= WIN_H)
-		v->end = WIN_H - 1;
+		v->draw_end = WIN_H - 1;
 	else
-		v->end = col->draw_end;
-	v->tex_x = col->tex_x;
-	if (v->tex_x < 0)
-		v->tex_x = 0;
-	if (v->tex_x >= tex->w)
-		v->tex_x = tex->w - 1;
-	v->y = v->start;
-	v->pixels = (int *)g->frame.addr;
-	v->line_len = g->frame.line_len / 4;
+		v->draw_end = col->draw_end;
+	v->texture_x = col->tex_x;
+	if (v->texture_x < 0)
+		v->texture_x = 0;
+	if (v->texture_x >= tex->w)
+		v->texture_x = tex->w - 1;
+	v->current_row = v->draw_start;
+	v->pixels_buffer = (int *)g->frame.addr;
+	v->pixels_per_row = g->frame.line_len / 4;
 }
 
 /**
@@ -61,11 +61,11 @@ static void	render_wall_slice(t_game *g, int x, const t_column *col)
 	if (!tex || !tex->addr || col->line_height <= 0)
 		return ;
 	init_wall_vars(&v, g, col, tex);
-	while (v.y <= v.end)
+	while (v.current_row <= v.draw_end)
 	{
-		color = get_shaded_color(col, tex, v.tex_x, v.y);
-		v.pixels[v.y * v.line_len + x] = color;
-		v.y++;
+		color = get_shaded_color(col, tex, v.texture_x, v.current_row);
+		v.pixels_buffer[v.current_row * v.pixels_per_row + x] = color;
+		v.current_row++;
 	}
 }
 
