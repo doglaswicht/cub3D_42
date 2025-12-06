@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:55:26 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/02 13:34:49 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 13:21:39 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,5 @@ const t_image	*get_tex_for_face(const t_textures *tx, int face)
  */
 int	get_texel(const t_image *tex, int tx, int ty)
 {
-	char	*p;
-
-	p = tex->addr + ty * tex->line_len + tx * (tex->bpp / 8);
-	return (*(unsigned int *)p);
-}
-
-/**
- * @brief Computes the Y coordinate in the texture for a given screen pixel.
- * @param tex Pointer to the texture image.
- * @param line_height Height of the wall slice on screen.
- * @param y Current screen Y coordinate.
- * @param start Starting Y coordinate of the wall slice.
- * @return The clamped Y coordinate in the texture.
- *
- * Calculates the proportional Y position in the texture for 
- * vertical wall rendering.
- */
-int	get_tex_y_from_start(const t_image *tex, int line_height, int y, int start)
-{
-	double	step;
-	double	tex_pos0;
-	double	tex_pos;
-	int		tex_y;
-
-	step = (double)tex->h / (double)line_height;
-	tex_pos0 = (start - WIN_H / 2 + line_height / 2) * step;
-	tex_pos = tex_pos0 + ((double)(y - start)*step);
-	tex_y = (int)tex_pos;
-	return (clampi(tex_y, 0, tex->h - 1));
+	return (*(unsigned int *)(tex->addr + ty * tex->line_len + tx * 4));
 }

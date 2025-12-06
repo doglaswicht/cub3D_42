@@ -6,12 +6,13 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:04:54 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/05 18:39:10 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 13:15:23 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**/
 /**
  * @brief Initializes the t_wall_vars structure for rendering a wall column.
  *
@@ -41,21 +42,17 @@ static void	init_wall_vars(t_wall_vars *v, t_game *g, const t_column *col,
 	v->current_row = v->draw_start;
 	v->pixels_buffer = (int *)g->frame.addr;
 	v->pixels_per_row = g->frame.line_len / 4;
+	v->tex_y_scaling = (double)tex->h / (double)col->line_height;
+	v->tex_y_position = (v->draw_start - WIN_H / 2 + col->line_height / 2)
+		* v->tex_y_scaling;
 }
 
-/**
- * @brief Draws a single wall column on the screen (vertical slice rendering).
- *
- * Uses direct buffer access for performance. Applies shading if enabled.
- * @param g Pointer to the game structure (frame buffer).
- * @param x Index of the column to draw (screen X coordinate).
- * @param col Pointer to the column to render (raycasting info).
- */
 static void	render_wall_slice(t_game *g, int x, const t_column *col)
 {
 	t_wall_vars		v;
-	int				color;
 	const t_image	*tex;
+	int				tex_y;
+	int				color;
 
 	tex = get_tex_for_face(&g->world.tx, col->face);
 	if (!tex || !tex->addr || col->line_height <= 0)
@@ -63,8 +60,11 @@ static void	render_wall_slice(t_game *g, int x, const t_column *col)
 	init_wall_vars(&v, g, col, tex);
 	while (v.current_row <= v.draw_end)
 	{
-		color = get_shaded_color(col, tex, v.texture_x, v.current_row);
+		tex_y = (int)v.tex_y_position;
+		color = get_texel(tex, v.texture_x, tex_y);
+		color = apply_shading(color, col->side);
 		v.pixels_buffer[v.current_row * v.pixels_per_row + x] = color;
+		v.tex_y_position += v.tex_y_scaling;
 		v.current_row++;
 	}
 }

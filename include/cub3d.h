@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/05 18:38:00 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 13:14:36 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "libft.h"
 
 /* ----- Window & input -- */
-//# define ENABLE_SHADING
+# define ENABLE_SHADING
 # define WIN_W       800
 # define WIN_H       600
 
@@ -161,12 +161,14 @@ typedef struct s_parse_state
 
 typedef struct s_wall_vars
 {
-	int	draw_start;
-	int	draw_end;
-	int	texture_x;
-	int	current_row;
-	int	*pixels_buffer;
-	int	pixels_per_row;
+	int		draw_start;
+	int		draw_end;
+	int		texture_x;
+	int		current_row;
+	int		*pixels_buffer;
+	int		pixels_per_row;
+	double	tex_y_scaling;
+	double	tex_y_position;
 }	t_wall_vars;
 
 typedef struct s_bg_vars
@@ -203,8 +205,7 @@ void			fill_column_basic(t_column *col, const t_raycast *rc);
 void			fill_column_tex(const t_game *g,
 					t_column *col, const t_raycast *rc);
 int				get_face(const t_raycast *rc);
-int				get_shaded_color(const t_column *col,
-					const t_image *tex, int tex_x, int y);
+int				apply_shading(int color, int side);
 int				clamp_tex_x(const t_column *col, const t_image *tex);
 int				clamp_draw_start(const t_column *col);
 int				clamp_draw_end(const t_column *col);
