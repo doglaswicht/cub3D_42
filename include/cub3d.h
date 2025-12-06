@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/06 13:14:36 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 14:23:53 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct s_column
 {
 	double	perp_dist;
 	int		line_height;
-	int		draw_start;
-	int		draw_end;
+	int		draw_wall_y_star;
+	int		draw_wall_y_end;
 	int		side;
 	int		face;
 	double	wall_x;
@@ -147,8 +147,8 @@ typedef struct s_raycast
 	int			hit;
 	int			side;
 	int			line_height;
-	int			draw_start;
-	int			draw_end;
+	int			wall_y_start;
+	int			wall_y_end;
 }				t_raycast;
 
 typedef struct s_parse_state
@@ -161,10 +161,10 @@ typedef struct s_parse_state
 
 typedef struct s_wall_vars
 {
-	int		draw_start;
-	int		draw_end;
-	int		texture_x;
-	int		current_row;
+	int		wall_col_start;
+	int		wall_col_end;
+	int		tex_x_index;
+	int		current_y_row;
 	int		*pixels_buffer;
 	int		pixels_per_row;
 	double	tex_y_scaling;
@@ -206,15 +206,7 @@ void			fill_column_tex(const t_game *g,
 					t_column *col, const t_raycast *rc);
 int				get_face(const t_raycast *rc);
 int				apply_shading(int color, int side);
-int				clamp_tex_x(const t_column *col, const t_image *tex);
-int				clamp_draw_start(const t_column *col);
-int				clamp_draw_end(const t_column *col);
 int				get_texel(const t_image *tex, int tx, int ty);
-int				get_tex_y(const t_image *tex,
-					int line_height, int y, int start);
-int				get_tex_y_from_start(const t_image *tex,
-					int line_height, int y, int start);
-
 double			compute_wall_x(const t_game *g, const t_raycast *rc);
 int				compute_tex_x(const t_game *g,
 					const t_raycast *rc, double wall_x, int face);
@@ -240,7 +232,6 @@ void			rotate_player(t_game *g, double angle);
 int				is_wall(const t_world *w, double x, double y);
 
 /* ----- Utils -- */
-int				clampi(int value, int min, int max);
 int				print_error(char *msg);
 int				print_usage(void);
 char			*skip_spaces(char *str);

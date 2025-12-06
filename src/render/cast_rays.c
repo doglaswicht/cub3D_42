@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:03 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/02 19:21:18 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 14:24:26 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	compute_perp_distance(const t_game *g, t_raycast *rc)
 void	compute_wall_height(t_raycast *rc)
 {
 	rc->line_height = (int)(WIN_H / rc->perp_wall_dist);
-	rc->draw_start = -rc->line_height / 2 + WIN_H / 2;
-	if (rc->draw_start < 0)
-		rc->draw_start = 0;
-	rc->draw_end = rc->line_height / 2 + WIN_H / 2;
-	if (rc->draw_end >= WIN_H)
-		rc->draw_end = WIN_H - 1;
+	rc->wall_y_start = -rc->line_height / 2 + WIN_H / 2;
+	if (rc->wall_y_start < 0)
+		rc->wall_y_start = 0;
+	rc->wall_y_end = rc->line_height / 2 + WIN_H / 2;
+	if (rc->wall_y_end >= WIN_H)
+		rc->wall_y_end = WIN_H - 1;
 }
 
 /**

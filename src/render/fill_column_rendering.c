@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:26 by csturny           #+#    #+#             */
-/*   Updated: 2025/11/16 13:39:27 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 14:27:15 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	fill_column_basic(t_column *col, const t_raycast *rc)
 {
 	col->perp_dist = rc->perp_wall_dist;
 	col->line_height = rc->line_height;
-	col->draw_start = rc->draw_start;
-	col->draw_end = rc->draw_end;
+	col->draw_wall_y_star = rc->wall_y_start;
+	col->draw_wall_y_end = rc->wall_y_end;
 	col->side = rc->side;
 }
 

@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:56:05 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/05 15:12:57 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/06 13:27:48 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,4 @@ int	print_usage(void)
 {
 	printf("Usage: ./cub3d <map_file.cub>\n");
 	return (1);
-}
-
-/** Clamps an integer between min and max. */
-int	clampi(int value, int min, int max)
-{
-	if (value < min)
-		return (min);
-	if (value > max)
-		return (max);
-	return (value);
 }
