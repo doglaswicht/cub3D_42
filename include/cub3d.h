@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/06 14:23:53 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:21:27 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define EV_DESTROY  17
 
 /* ----- Player movement & rotation speeds ----- */
-# define MOVE_SPEED	0.03
-# define ROT_SPEED 	0.025
+# define MOVE_SPEED	0.001
+# define ROT_SPEED 	0.001
 
 /* ----- Rendering helpers -- */
 # define FACE_NORTH 0
@@ -81,8 +81,8 @@ typedef struct s_column
 	int		draw_wall_y_end;
 	int		side;
 	int		face;
-	double	wall_x;
-	int		tex_x;
+	double	wall_hit_fraction_x;
+	int		tex_x_index;
 }				t_column;
 
 typedef struct s_tex_paths
@@ -202,13 +202,13 @@ void			run_dda(const t_game *g, t_raycast *rc);
 void			compute_perp_distance(const t_game *g, t_raycast *rc);
 void			compute_wall_height(t_raycast *rc);
 void			fill_column_basic(t_column *col, const t_raycast *rc);
-void			fill_column_tex(const t_game *g,
+void			comupte_and_fill_column_tex(const t_game *g,
 					t_column *col, const t_raycast *rc);
 int				get_face(const t_raycast *rc);
 int				apply_shading(int color, int side);
 int				get_texel(const t_image *tex, int tx, int ty);
-double			compute_wall_x(const t_game *g, const t_raycast *rc);
-int				compute_tex_x(const t_game *g,
+double			compute_wall_hit_fraction(const t_game *g, const t_raycast *rc);
+int				compute_wall_texture_x(const t_game *g,
 					const t_raycast *rc, double wall_x, int face);
 
 /* ----- Parsing --*/

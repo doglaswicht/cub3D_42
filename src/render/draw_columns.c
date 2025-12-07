@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 15:04:54 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/06 14:20:06 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:12:57 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_wall_vars(t_wall_vars *v, t_game *g, const t_column *col,
 		v->wall_col_end = WIN_H - 1;
 	else
 		v->wall_col_end = col->draw_wall_y_end;
-	v->tex_x_index = col->tex_x;
+	v->tex_x_index = col->tex_x_index;
 	if (v->tex_x_index < 0)
 		v->tex_x_index = 0;
 	if (v->tex_x_index >= tex->w)

@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:26 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/06 14:27:15 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:11:29 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void	fill_column_basic(t_column *col, const t_raycast *rc)
  *
  * Determines wall face, hit position, and texture X coordinate for the column.
  */
-void	fill_column_tex(const t_game *g, t_column *col, const t_raycast *rc)
+void	comupte_and_fill_column_tex(const t_game *g,
+	t_column *col, const t_raycast *rc)
 {
 	col->face = get_face(rc);
-	col->wall_x = compute_wall_x(g, rc);
-	col->tex_x = compute_tex_x(g, rc, col->wall_x, col->face);
+	col->wall_hit_fraction_x = compute_wall_hit_fraction(g, rc);
+	col->tex_x_index = compute_wall_texture_x(g, rc, col->wall_hit_fraction_x,
+			col->face);
 }

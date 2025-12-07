@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 13:39:03 by csturny           #+#    #+#             */
-/*   Updated: 2025/12/06 14:24:26 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 13:36:22 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	cast_rays(const t_game *g, t_column cols[WIN_W])
 		compute_perp_distance(g, &rc);
 		compute_wall_height(&rc);
 		fill_column_basic(&cols[x], &rc);
-		fill_column_tex(g, &cols[x], &rc);
+		comupte_and_fill_column_tex(g, &cols[x], &rc);
 		x++;
 	}
 }
