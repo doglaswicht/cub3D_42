@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/07 14:21:27 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 15:41:52 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,17 @@
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
+# include <sys/time.h>
 
 /* ----- Window & input -- */
 # define ENABLE_SHADING
 # define WIN_W       800
 # define WIN_H       600
+
+/* ----- Player movement & rotation speeds ----- */
+# define MOVE_SPEED	4
+# define ROT_SPEED 	2
+# define TARGET_FPS 100
 
 /* ----- Window & input -- */
 # define KEY_ESC     65307
@@ -38,10 +44,6 @@
 # define EV_KEYPRESS 2
 # define EV_KEYPRELEASE 3
 # define EV_DESTROY  17
-
-/* ----- Player movement & rotation speeds ----- */
-# define MOVE_SPEED	0.001
-# define ROT_SPEED 	0.001
 
 /* ----- Rendering helpers -- */
 # define FACE_NORTH 0
@@ -129,6 +131,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	int			need_redraw;
+	double		delta_time;
 	t_image		frame;
 	t_world		world;
 	t_player	player;
@@ -230,11 +233,14 @@ int				handle_move(t_game *g);
 void			move_player(t_game *g, double dx, double dy);
 void			rotate_player(t_game *g, double angle);
 int				is_wall(const t_world *w, double x, double y);
+double			get_delta_time(void);
 
 /* ----- Utils -- */
 int				print_error(char *msg);
 int				print_usage(void);
 char			*skip_spaces(char *str);
+double			get_time_in_seconds(void);
+void			print_fps(void);
 
 
 #endif

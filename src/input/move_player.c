@@ -6,20 +6,21 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:45 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/05 14:22:15 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:58:47 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * @brief Moves the player by (dx, dy) if there is no wall collision.
- * @param g Pointer to the game state.
- * @param dx Delta movement in X direction.
- * @param dy Delta movement in Y direction.
+ * @brief Moves the player by the given delta, with wall collision detection.
  *
- * Checks for wall collisions separately on X and Y axes,
- * and updates the player's position if the move is valid.
+ * Attempts to move the player by (dx, dy). If the new position would collide
+ * with a wall, the movement along that axis is blocked.
+ *
+ * @param g Pointer to the game state.
+ * @param dx Delta to add to the player's X position.
+ * @param dy Delta to add to the player's Y position.
  */
 void	move_player(t_game *g, double dx, double dy)
 {

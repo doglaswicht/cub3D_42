@@ -6,7 +6,7 @@
 /*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:32 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/05 14:20:03 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:48:03 by csturny          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ static int	handle_rotate(t_game *g)
 	changed = 0;
 	if (g->keys.left)
 	{
-		rotate_player(g, -ROT_SPEED);
+		rotate_player(g, -ROT_SPEED * g->delta_time);
 		changed = 1;
 	}
 	if (g->keys.right)
 	{
-		rotate_player(g, ROT_SPEED);
+		rotate_player(g, ROT_SPEED * g->delta_time);
 		changed = 1;
 	}
 	return (changed);
