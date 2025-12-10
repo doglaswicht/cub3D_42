@@ -1,7 +1,7 @@
 NAME    = cub3d
 
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror  -O3 -g  #a remettre de base sans -g et -O3 -g
+CFLAGS  = -Wall -Wextra -Werror  #a remettre de base sans -g et -O3 -g
 
 # préprocesseur (headers) : inclure le répertoire include et mlx
 CPPFLAGS = -I$(INCDIR) $(MLX_INC) -Ilibft

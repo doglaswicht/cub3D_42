@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/07 15:41:52 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:46:14 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /* ----- Player movement & rotation speeds ----- */
 # define MOVE_SPEED	4
 # define ROT_SPEED 	2
-# define TARGET_FPS 100
+# define TARGET_FPS 200
 
 /* ----- Window & input -- */
 # define KEY_ESC     65307
@@ -241,6 +241,5 @@ int				print_usage(void);
 char			*skip_spaces(char *str);
 double			get_time_in_seconds(void);
 void			print_fps(void);
-
 
 #endif

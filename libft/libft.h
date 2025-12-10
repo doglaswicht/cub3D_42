@@ -53,6 +53,5 @@ int		ft_toupper(int c);
 
 /* --- ajout apres rendu cercle 0 --------*/
 char	*get_next_line(int fd);
-int		ft_atoi_base(const char *str, int str_base);
 
 #endif

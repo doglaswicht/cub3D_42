@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 21:21:34 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/07 15:52:35 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:45:58 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	game_loop(void *param)
 	}
 	else
 		usleep(10000);
-
 	elapsed = get_time_in_seconds() - start;
 	if (elapsed < (1.0 / TARGET_FPS))
 		usleep(((1.0 / TARGET_FPS) - elapsed) * 1000000.0);
