@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:40:31 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/10 14:26:33 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:41:55 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ int	is_wall(const t_world *w, double x, double y)
 	if (mx >= line_len)
 		return (1);
 	if (w->map[my][mx] == '1')
+		return (1);
+	return (0);
+}
+
+int	is_wall_with_radius(const t_world *w, double x, double y)
+{
+	if (is_wall(w, x - PLAYER_RADIUS, y - PLAYER_RADIUS))
+		return (1);
+	if (is_wall(w, x + PLAYER_RADIUS, y - PLAYER_RADIUS))
+		return (1);
+	if (is_wall(w, x - PLAYER_RADIUS, y + PLAYER_RADIUS))
+		return (1);
+	if (is_wall(w, x + PLAYER_RADIUS, y + PLAYER_RADIUS))
 		return (1);
 	return (0);
 }

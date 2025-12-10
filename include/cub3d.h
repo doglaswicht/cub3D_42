@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/10 14:46:14 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:40:32 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define MOVE_SPEED	4
 # define ROT_SPEED 	2
 # define TARGET_FPS 200
+# define PLAYER_RADIUS 0.2
 
 /* ----- Window & input -- */
 # define KEY_ESC     65307
@@ -233,6 +234,7 @@ int				handle_move(t_game *g);
 void			move_player(t_game *g, double dx, double dy);
 void			rotate_player(t_game *g, double angle);
 int				is_wall(const t_world *w, double x, double y);
+int				is_wall_with_radius(const t_world *w, double x, double y);
 double			get_delta_time(void);
 
 /* ----- Utils -- */

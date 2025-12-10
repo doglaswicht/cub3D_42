@@ -160,3 +160,17 @@
 
 19 directories, 139 files
 ```
+leaks:
+Sans suppression X11:
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3d maps_autres/map_intra_subject.cub
+
+Avec suppression X11 V1:
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=valgrind.suppresion ./cub3d maps_autres/map_intra_subject.cub
+
+Optimisation avec callgrind:
+1:
+valgrind --tool=callgrind ./cub3d map_senario/test_big_room.cub
+2:
+callgrind_annotate callgrind.out.*
+3 - info juste basique:
+callgrind_annotate --auto=yes callgrind.out.8681 | less

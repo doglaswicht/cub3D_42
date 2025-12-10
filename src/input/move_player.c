@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csturny <csturny@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 20:39:45 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/07 14:58:47 by csturny          ###   ########.fr       */
+/*   Updated: 2025/12/10 15:36:24 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	move_player(t_game *g, double dx, double dy)
 
 	new_x = g->player.pos.x + dx;
 	new_y = g->player.pos.y + dy;
-	if (!is_wall(&g->world, new_x, g->player.pos.y))
+	if (!is_wall_with_radius(&g->world, new_x, g->player.pos.y))
 		g->player.pos.x = new_x;
-	if (!is_wall(&g->world, g->player.pos.x, new_y))
+	if (!is_wall_with_radius(&g->world, g->player.pos.x, new_y))
 		g->player.pos.y = new_y;
 }
