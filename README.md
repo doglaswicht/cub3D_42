@@ -148,18 +148,12 @@
 │   ├── fun2.xpm
 │   ├── fun3.xpm
 │   ├── fun4.xpm
-│   ├── testE.png
 │   ├── testE.xpm
-│   ├── testN.png
 │   ├── testN.xpm
-│   ├── testS.png
 │   ├── testS.xpm
-│   ├── testW.png
 │   └── testW.xpm
 └── valgrind.suppresion
 
-19 directories, 139 files
-```
 leaks:
 Sans suppression X11:
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3d maps/test_10_10.cub
@@ -174,3 +168,5 @@ valgrind --tool=callgrind ./cub3d maps/test_10_10.cub
 callgrind_annotate callgrind.out.*
 3 - info juste basique:
 callgrind_annotate --auto=yes callgrind.out.8681 | less
+
+```
