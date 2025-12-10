@@ -2,158 +2,161 @@
 .
 ├── Makefile
 ├── README.md
+├── clean_x11.supp
 ├── include
-│   ├── cub3d.h
-│   ├── parse.h
-│   ├── render.h
-│   └── utils.h
+│   └── cub3d.h
 ├── libft
-│   ├── Makefile
-│   ├── README.md
-│   ├── ft_atoi.c
-│   ├── ft_bzero.c
-│   ├── ft_isalnum.c
-│   ├── ft_isalpha.c
-│   ├── ft_isascii.c
-│   ├── ft_isdigit.c
-│   ├── ft_isprint.c
-│   ├── ft_memchr.c
-│   ├── ft_memcmp.c
-│   ├── ft_memcpy.c
-│   ├── ft_memmove.c
-│   ├── ft_memset.c
-│   ├── ft_strchr.c
-│   ├── ft_strlcat.c
-│   ├── ft_strlcpy.c
-│   ├── ft_strlen.c
-│   ├── ft_strncmp.c
-│   ├── ft_strnstr.c
-│   ├── ft_strrchr.c
-│   ├── ft_tolower.c
-│   ├── ft_toupper.c
-│   └── libft.h
-├── map.cub
+│   ├── Makefile
+│   ├── documentation.txt
+│   ├── ft_atoi.c
+│   ├── ft_bzero.c
+│   ├── ft_calloc.c
+│   ├── ft_isalnum.c
+│   ├── ft_isalpha.c
+│   ├── ft_isascii.c
+│   ├── ft_isdigit.c
+│   ├── ft_isprint.c
+│   ├── ft_itoa.c
+│   ├── ft_memchr.c
+│   ├── ft_memcmp.c
+│   ├── ft_memcpy.c
+│   ├── ft_memmove.c
+│   ├── ft_memset.c
+│   ├── ft_putchar_fd.c
+│   ├── ft_putendl_fd.c
+│   ├── ft_putnbr_fd.c
+│   ├── ft_putstr_fd.c
+│   ├── ft_split.c
+│   ├── ft_strchr.c
+│   ├── ft_strdup.c
+│   ├── ft_striteri.c
+│   ├── ft_strjoin.c
+│   ├── ft_strlcat.c
+│   ├── ft_strlcpy.c
+│   ├── ft_strlen.c
+│   ├── ft_strmapi.c
+│   ├── ft_strncmp.c
+│   ├── ft_strnstr.c
+│   ├── ft_strrchr.c
+│   ├── ft_strtrim.c
+│   ├── ft_substr.c
+│   ├── ft_tolower.c
+│   ├── ft_toupper.c
+│   ├── get_next_line.c
+│   ├── get_next_line.h
+│   └── libft.h
+├── map_senario
+│   ├── error
+│   │   ├── test_big_hole.cub
+│   │   ├── test_color_invalid_ok.cub
+│   │   ├── test_color_trailing_a_corriger.cub
+│   │   ├── test_duplicate_texture_ok.cub
+│   │   ├── test_empty_line_in_map_ok.cub
+│   │   ├── test_invalid_char_ko_message.cub
+│   │   ├── test_missing_texture_ok.cub
+│   │   ├── test_multiple_spawns_ok.cub
+│   │   ├── test_open_map_left_ok.cub
+│   │   ├── test_open_map_top_ok.cub
+│   │   ├── test_spaces_hole_verifier.cub
+│   │   ├── test_spawn_all_dirs.cub
+│   │   └── test_trailing_spaces_acorriger.cub
+│   ├── test_10_10.cub
+│   ├── test_angle.cub
+│   ├── test_angle_error.cub
+│   ├── test_big_room.cub
+│   ├── test_box_center.cub
+│   ├── test_corridor_EW.cub
+│   ├── test_corridor_NS.cub
+│   ├── test_corridor_ew_error.cub
+│   └── test_near_wall.cub
 ├── maps
-│   └── map.cub
-├── minilibx-linux
-│   ├── LICENSE
-│   ├── Makefile
-│   ├── Makefile.gen
-│   ├── Makefile.mk
-│   ├── README.md
-│   ├── configure
-│   ├── libmlx.a
-│   ├── libmlx_Linux.a
-│   ├── man
-│   │   ├── man1
-│   │   │   ├── mlx.1
-│   │   │   ├── mlx_loop.1
-│   │   │   ├── mlx_new_image.1
-│   │   │   ├── mlx_new_window.1
-│   │   │   └── mlx_pixel_put.1
-│   │   └── man3
-│   │       ├── mlx.3
-│   │       ├── mlx_loop.3
-│   │       ├── mlx_new_image.3
-│   │       ├── mlx_new_window.3
-│   │       └── mlx_pixel_put.3
-│   ├── mlx.h
-│   ├── mlx_clear_window.c
-│   ├── mlx_destroy_display.c
-│   ├── mlx_destroy_image.c
-│   ├── mlx_destroy_window.c
-│   ├── mlx_expose_hook.c
-│   ├── mlx_ext_randr.c
-│   ├── mlx_flush_event.c
-│   ├── mlx_get_color_value.c
-│   ├── mlx_get_data_addr.c
-│   ├── mlx_hook.c
-│   ├── mlx_init.c
-│   ├── mlx_int.h
-│   ├── mlx_int_anti_resize_win.c
-│   ├── mlx_int_do_nothing.c
-│   ├── mlx_int_get_visual.c
-│   ├── mlx_int_param_event.c
-│   ├── mlx_int_set_win_event_mask.c
-│   ├── mlx_int_str_to_wordtab.c
-│   ├── mlx_int_wait_first_expose.c
-│   ├── mlx_key_hook.c
-│   ├── mlx_lib_xpm.c
-│   ├── mlx_loop.c
-│   ├── mlx_loop_hook.c
-│   ├── mlx_mouse.c
-│   ├── mlx_mouse_hook.c
-│   ├── mlx_new_image.c
-│   ├── mlx_new_window.c
-│   ├── mlx_pixel_put.c
-│   ├── mlx_put_image_to_window.c
-│   ├── mlx_rgb.c
-│   ├── mlx_screen_size.c
-│   ├── mlx_set_font.c
-│   ├── mlx_string_put.c
-│   ├── mlx_xpm.c
-│   ├── mlx_xpm.c.ok
-│   ├── obj
-│   │   ├── mlx_clear_window.o
-│   │   ├── mlx_destroy_display.o
-│   │   ├── mlx_destroy_image.o
-│   │   ├── mlx_destroy_window.o
-│   │   ├── mlx_expose_hook.o
-│   │   ├── mlx_flush_event.o
-│   │   ├── mlx_get_color_value.o
-│   │   ├── mlx_get_data_addr.o
-│   │   ├── mlx_hook.o
-│   │   ├── mlx_init.o
-│   │   ├── mlx_int_anti_resize_win.o
-│   │   ├── mlx_int_do_nothing.o
-│   │   ├── mlx_int_get_visual.o
-│   │   ├── mlx_int_param_event.o
-│   │   ├── mlx_int_set_win_event_mask.o
-│   │   ├── mlx_int_str_to_wordtab.o
-│   │   ├── mlx_int_wait_first_expose.o
-│   │   ├── mlx_key_hook.o
-│   │   ├── mlx_loop.o
-│   │   ├── mlx_loop_hook.o
-│   │   ├── mlx_mouse.o
-│   │   ├── mlx_mouse_hook.o
-│   │   ├── mlx_new_image.o
-│   │   ├── mlx_new_window.o
-│   │   ├── mlx_pixel_put.o
-│   │   ├── mlx_put_image_to_window.o
-│   │   ├── mlx_rgb.o
-│   │   ├── mlx_screen_size.o
-│   │   ├── mlx_set_font.o
-│   │   ├── mlx_string_put.o
-│   │   └── mlx_xpm.o
-│   ├── rgb2c.pl
-│   └── test
-│       ├── Makefile.gen
-│       ├── Makefile.mk
-│       ├── main.c
-│       ├── main.o
-│       ├── mlx-test
-│       ├── new_win.c
-│       ├── open.xpm
-│       ├── open24.xpm
-│       ├── open30.xpm
-│       └── run_tests.sh
-├── minilibx-linux.tgz
-└── src
-    ├── init
-    │   ├── init_data.c
-    │   └── init_mlx.c
-    ├── main.c
-    ├── parser
-    │   ├── check_errors.c
-    │   ├── parser_file.c
-    │   └── parser_map.c
-    ├── render
-    │   ├── draw.c
-    │   └── raycaster.c
-    └── utils
-        ├── error.c
-        ├── free.c
-        └── pixel.c
+│   ├── map.cub
+│   ├── simple.cub
+│   └── test.map
+├── maps_autres
+│   ├── error
+│   │   ├── empty.cub
+│   │   ├── empty_lines.cub
+│   │   ├── maxi_map.cub
+│   │   ├── maxi_maps2.cub
+│   │   ├── rgb_error.cub
+│   │   ├── unvalid_floor.cub
+│   │   ├── unvalid_id.cub
+│   │   ├── unvalid_id2.cub
+│   │   ├── unvalid_player.cub
+│   │   └── unvalid_player2.cub
+│   ├── fun.cub
+│   ├── map_intra_subject.cub
+│   ├── map_intra_subject_copy.cub
+│   ├── test1.cub
+│   ├── test5.cub
+│   ├── test6.cub
+│   ├── testE.cub
+│   ├── testN.cub
+│   ├── testS.cub
+│   └── testW.cub
+├── src
+│   ├── core
+│   │   └── main.c
+│   ├── game
+│   │   ├── game_destroy.c
+│   │   ├── game_init.c
+│   │   └── game_loop.c
+│   ├── init
+│   │   └── init_player_from_spawn.c
+│   ├── input
+│   │   ├── collision.c
+│   │   ├── handle_input.c
+│   │   ├── handle_move.c
+│   │   ├── move_player.c
+│   │   └── rotate_player.c
+│   ├── mlx
+│   │   ├── init_images.c
+│   │   └── mlx_init.c
+│   ├── parser
+│   │   ├── find_spawn.c
+│   │   ├── parse_cub.c
+│   │   ├── parse_line.c
+│   │   ├── parse_map_line.c
+│   │   ├── parse_rgb.c
+│   │   ├── read_line.c
+│   │   └── validate_map.c
+│   ├── render
+│   │   ├── cast_rays.c
+│   │   ├── color_shading.c
+│   │   ├── compute_dda_params.c
+│   │   ├── draw_columns.c
+│   │   ├── fill_column_rendering.c
+│   │   ├── get_face.c
+│   │   ├── render.c
+│   │   ├── render_background.c
+│   │   └── run_dda.c
+│   ├── textures
+│   │   ├── init_tex.c
+│   │   ├── tex_utils.c
+│   │   └── wall_tex_coords.c
+│   └── utils
+│       ├── free_world.c
+│       ├── utils.c
+│       └── utils.time.c
+├── textures
+│   ├── Wall1.xpm
+│   ├── Wall2.xpm
+│   ├── Wall3.xpm
+│   ├── Wall4.xpm
+│   ├── fun1.xpm
+│   ├── fun2.xpm
+│   ├── fun3.xpm
+│   ├── fun4.xpm
+│   ├── testE.png
+│   ├── testE.xpm
+│   ├── testN.png
+│   ├── testN.xpm
+│   ├── testS.png
+│   ├── testS.xpm
+│   ├── testW.png
+│   └── testW.xpm
+└── valgrind.suppresion
 
-15 directories, 140 files
+19 directories, 139 files
 ```
