@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:39:54 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/12/04 15:15:57 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:51:07 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define EV_DESTROY  17
 
 /* ----- Player movement & rotation speeds ----- */
-# define MOVE_SPEED	0.03
+# define MOVE_SPEED	0.05
 # define ROT_SPEED 	0.025
 
 /* ----- Rendering helpers -- */
