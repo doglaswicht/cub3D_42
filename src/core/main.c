@@ -6,7 +6,7 @@
 /*   By: dleite-b <dleite-b@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:57:22 by dleite-b          #+#    #+#             */
-/*   Updated: 2025/11/19 15:59:29 by dleite-b         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:00:27 by dleite-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	is_cub_file(char *path)
 {
-	const char	*dot = ft_strrchr(path, '.');
+	const char	*dot;
 
+	dot = ft_strrchr(path, '.');
 	if (!dot)
 		return (0);
 	return (ft_strncmp(dot + 1, "cub", 4) == 0);
