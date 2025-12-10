@@ -57,9 +57,9 @@ int	compute_wall_texture_x(const t_game *g, const t_raycast *rc,
 
 	wall_tex = get_tex_for_face(&g->world.tx, face);
 	tex_x_index = (int)(wall_hit_fraction_x * (double)wall_tex->w);
-	if (rc->side == 0 && rc->raydir.x > 0)
+	if (rc->side == 0 && rc->raydir.x < 0)
 		tex_x_index = wall_tex->w - tex_x_index - 1;
-	if (rc->side == 1 && rc->raydir.y < 0)
+	if (rc->side == 1 && rc->raydir.y > 0)
 		tex_x_index = wall_tex->w - tex_x_index - 1;
 	return (tex_x_index);
 }
